@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { categories } from "@/data/site";
-import { getProjectCover, isRemotePortfolioImage } from "@/lib/project-images";
 
 const portals = [
   {
@@ -13,7 +12,7 @@ const portals = [
     label: categories.ux.label,
     description: categories.ux.description,
     href: categories.ux.href,
-    previewSlug: "namma-metro",
+    image: "/explore/ux-service-design.png",
     tint: "from-sky-400/25 via-peri/20 to-transparent",
     glow: "group-hover:shadow-[0_24px_80px_rgba(56,189,248,0.18)]",
   },
@@ -22,7 +21,7 @@ const portals = [
     label: categories.ui.label,
     description: categories.ui.description,
     href: categories.ui.href,
-    previewSlug: "caelum",
+    image: "/explore/ui-visual-design.png",
     tint: "from-fuchsia-400/20 via-peri/25 to-transparent",
     glow: "group-hover:shadow-[0_24px_80px_rgba(192,132,252,0.2)]",
   },
@@ -34,11 +33,9 @@ export function CategoryPortals() {
   );
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:items-start md:gap-x-8">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:items-stretch md:gap-x-8">
       {portals.map((portal, index) => {
-        const preview = getProjectCover(portal.previewSlug);
         const isActive = activeId === portal.id;
-        const placement = index === 1 ? "md:mt-16 lg:mt-20" : "";
 
         return (
           <motion.div
@@ -51,40 +48,37 @@ export function CategoryPortals() {
               delay: index * 0.1,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className={placement}
+            className="h-full"
           >
             <Link
               href={portal.href}
-              className={`portal-panel group relative block min-h-[280px] overflow-hidden rounded-3xl md:min-h-[320px] ${portal.glow}`}
+              className={`portal-panel group relative block aspect-square w-full overflow-hidden rounded-3xl ${portal.glow}`}
               onMouseEnter={() => setActiveId(portal.id)}
               onMouseLeave={() => setActiveId(null)}
               onFocus={() => setActiveId(portal.id)}
               onBlur={() => setActiveId(null)}
             >
-              {preview && (
-                <div className="absolute inset-0">
-                  <Image
-                    src={preview}
-                    alt=""
-                    fill
-                    className={`object-cover transition-all duration-700 ${
-                      isActive
-                        ? "scale-105 opacity-45"
-                        : "scale-100 opacity-25"
-                    }`}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    unoptimized={isRemotePortfolioImage(preview)}
-                  />
-                </div>
-              )}
+              <div className="portal-panel__backdrop">
+                <Image
+                  src={portal.image}
+                  alt=""
+                  fill
+                  priority
+                  className={`object-cover transition-transform duration-700 ${
+                    isActive ? "scale-105" : "scale-100"
+                  }`}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${portal.tint} transition-opacity duration-500 ${
+                    isActive ? "opacity-35" : "opacity-20"
+                  }`}
+                />
+              </div>
 
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${portal.tint} transition-opacity duration-500 ${
-                  isActive ? "opacity-100" : "opacity-70"
-                }`}
-              />
+              <div className="portal-panel__frost" aria-hidden />
 
-              <div className="glass-strong relative flex h-full flex-col justify-between p-6 md:p-8">
+              <div className="portal-panel__content flex h-full flex-col justify-between p-6 md:p-8">
                 <div>
                   <h2 className="text-2xl font-medium text-text-primary transition-colors group-hover:text-peri-glow md:text-3xl">
                     {portal.label}
