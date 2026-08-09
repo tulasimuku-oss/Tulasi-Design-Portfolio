@@ -106,7 +106,7 @@ export function HeroSection() {
 
           <FadeIn
             delay={0.2}
-            className="glass-strong rounded-3xl p-6 md:p-8"
+            className="glass-strong overflow-visible rounded-3xl p-6 md:p-8"
           >
             <p className="text-base leading-relaxed text-text-muted md:text-lg">
               {site.bio}
@@ -123,7 +123,7 @@ export function HeroSection() {
               <button
                 type="button"
                 onClick={() => setContactOpen(true)}
-                className="inline-flex rounded-full bg-gradient-to-r from-peri to-peri-light px-7 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(102,103,171,0.55),inset_0_1px_0_rgba(255,255,255,0.35)] ring-1 ring-white/30 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_44px_rgba(139,140,199,0.75)]"
+                className="cta-button"
               >
                 Let&apos;s Get In Touch
               </button>

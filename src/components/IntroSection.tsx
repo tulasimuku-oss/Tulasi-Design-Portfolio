@@ -16,7 +16,7 @@ export function IntroSection() {
       <div className="mx-auto max-w-6xl">
         <AnimatedSection>
           <div className="glass-panel p-5 md:p-8">
-            <p className="label-caps text-peri-glow">Skillset &amp; Tools</p>
+            <p className="label-caps text-peri-glow">Skillset</p>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2 md:items-stretch md:gap-5">
               <div className="skillset-panel flex min-h-[260px] flex-col gap-1.5 p-2 md:min-h-[300px] md:p-3">
@@ -55,15 +55,20 @@ export function IntroSection() {
               </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-7 gap-2 md:gap-3">
-              {tools.map((tool) => (
-                <div
-                  key={tool}
-                  className="glass-pill tool-capsule flex items-center justify-center rounded-full px-2 py-2.5"
-                >
-                  <span className="tool-capsule-label">{tool}</span>
-                </div>
-              ))}
+            <div className="mt-6 border-t border-white/12 pt-5 md:pt-6">
+              <p className="label-caps text-text-subtle">Tools</p>
+              <p className="mt-3 text-sm leading-loose text-text-muted md:text-base">
+                {tools.map((tool, index) => (
+                  <span key={tool}>
+                    {index > 0 && (
+                      <span className="mx-2 text-text-subtle/40" aria-hidden>
+                        /
+                      </span>
+                    )}
+                    {tool}
+                  </span>
+                ))}
+              </p>
             </div>
           </div>
         </AnimatedSection>

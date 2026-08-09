@@ -221,6 +221,33 @@ body {
     0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.875rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+  background: linear-gradient(to right, var(--peri), var(--peri-light));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 0 32px rgba(102, 103, 171, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 0 44px rgba(139, 140, 199, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
 .glow-peri {
   box-shadow:
     0 0 60px rgba(102, 103, 171, 0.35),
