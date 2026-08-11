@@ -31,14 +31,14 @@ export function DynamicProjectShowcase({
   const featuredPlacement = (index: number) => {
     if (!isEqualFeaturedPair) return "";
     if (index === 0) return "md:col-start-1 md:row-start-1";
-    return "md:col-start-2 md:row-start-1 md:mt-16 lg:mt-20";
+    return "md:col-start-2 md:row-start-1";
   };
 
   return (
     <div
       className={
         isEqualFeaturedPair
-          ? "grid grid-cols-1 gap-5 md:grid-cols-2 md:items-start md:gap-x-8"
+          ? "grid grid-cols-1 gap-5 md:grid-cols-2 md:items-stretch md:gap-x-8"
           : "grid auto-rows-[260px] grid-cols-1 gap-5 md:auto-rows-[220px] md:grid-cols-12 md:gap-6"
       }
     >

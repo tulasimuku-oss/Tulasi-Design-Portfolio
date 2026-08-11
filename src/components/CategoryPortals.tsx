@@ -64,8 +64,10 @@ export function CategoryPortals() {
                   alt=""
                   fill
                   priority
-                  className={`object-cover transition-transform duration-700 ${
-                    isActive ? "scale-105" : "scale-100"
+                  className={`object-cover transition-all duration-700 ${
+                    isActive
+                      ? "scale-105 saturate-100"
+                      : "scale-100 saturate-[0.68]"
                   }`}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
