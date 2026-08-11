@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -38,18 +37,17 @@ export function Header() {
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-[1.25rem] px-5 py-3.5 md:rounded-[1.75rem] md:px-6">
         <Link
           href="/"
-          className="nav-logo-link shrink-0 transition-opacity hover:opacity-85"
+          className="shrink-0"
           onClick={() => setMenuOpen(false)}
           aria-label={`${site.name} — Home`}
         >
-          <Image
-            src="/logo-nav.png"
-            alt=""
-            width={44}
-            height={44}
-            className="nav-logo h-10 w-10 object-contain md:h-11 md:w-11"
-            priority
-            unoptimized
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt={site.name}
+            width={40}
+            height={40}
+            className="h-10 w-10 object-contain md:h-11 md:w-11"
           />
         </Link>
 
