@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   },
   description: site.bio,
   icons: {
-    icon: "/logo.png",
+    icon: [{ url: "/favicon.png?v=2", type: "image/png" }],
+    apple: "/favicon.png?v=2",
   },
   openGraph: {
     title: site.name,
