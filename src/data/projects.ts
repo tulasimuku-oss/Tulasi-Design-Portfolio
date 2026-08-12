@@ -119,8 +119,6 @@ export const projects: Project[] = [
     year: "",
     category: "ui",
     featured: true,
-    description:
-      "My one year of full time experience designing for multiple brands under Insnap Technologies., from July 2025 to July 2026",
     coverImage: "/projects/insnap/cover.png",
     featuredCoverImage: "/projects/insnap/cover.png",
   },
