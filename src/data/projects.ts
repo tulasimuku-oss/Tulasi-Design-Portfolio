@@ -113,6 +113,16 @@ export const projects: Project[] = [
     prototypeUrl:
       "https://www.figma.com/make/tmXXUpARBOQuEo6vkBL5zd/Personal-Budget-Planner-App?fullscreen=1&t=xwLv1r0J4VbRzMxQ-1&code-node-id=0-6",
   },
+  {
+    slug: "insnap",
+    title: "Insnap Technologies Pvt Ltd",
+    year: "",
+    category: "ui",
+    featured: false,
+    description:
+      "My one year of full time experience designing for multiple brands under Insnap Technologies., from July 2025 to July 2026",
+    coverImage: "/projects/insnap/cover.png",
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
@@ -137,6 +147,7 @@ export function getProjectsByCategory(category: ProjectCategory): Project[] {
     ui: [
       "caelum",
       "budgee",
+      "insnap",
       "liveasy",
       "myco-interiors",
       "upi-device",

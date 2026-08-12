@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { LazyInView } from "@/components/LazyInView";
+import { SlideLinkButtons } from "@/components/SlideLinkButtons";
+import type { SlideLink } from "@/data/slide-links";
 import { optimizeGalleryUrl, isRemotePortfolioImage } from "@/lib/project-images";
 
 interface ProjectGalleryProps {
@@ -13,6 +15,7 @@ interface ProjectGalleryProps {
   layout?: "showcase" | "masonry";
   imageFit?: "cover" | "contain";
   interactive?: boolean;
+  slideLinks?: Record<number, SlideLink[]>;
 }
 
 export function ProjectGallery({
@@ -21,6 +24,7 @@ export function ProjectGallery({
   layout = "showcase",
   imageFit = "cover",
   interactive = true,
+  slideLinks,
 }: ProjectGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -76,6 +80,9 @@ export function ProjectGallery({
               imageFit={imageFit}
               interactive={interactive}
             />
+            {slideLinks?.[i] && (
+              <SlideLinkButtons links={slideLinks[i]} />
+            )}
           </motion.div>
         ))}
       </div>

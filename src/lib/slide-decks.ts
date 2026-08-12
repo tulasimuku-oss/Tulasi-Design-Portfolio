@@ -4,6 +4,7 @@ export const SLIDE_DECK_PROJECTS = {
   "mingos-payment": 7,
   liveasy: 15,
   budgee: 18,
+  insnap: 10,
 } as const;
 
 export type SlideDeckSlug = keyof typeof SLIDE_DECK_PROJECTS;

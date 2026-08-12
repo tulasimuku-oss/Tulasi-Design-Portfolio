@@ -6,6 +6,7 @@ import { ProjectGallery } from "@/components/ProjectGallery";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projects, getProject } from "@/data/projects";
 import { getProjectImages, getProjectCover } from "@/lib/project-images";
+import { getProjectSlideLinks } from "@/data/slide-links";
 import { isSlideDeckProject } from "@/lib/slide-decks";
 
 interface PageProps {
@@ -57,6 +58,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const galleryImages = isSlideDeck
     ? getProjectImages(slug)
     : galleryWithoutCover(getProjectImages(slug), slug);
+  const slideLinks = getProjectSlideLinks(slug);
 
   const related = projects
     .filter((p) => p.category === project.category && p.slug !== project.slug)
@@ -78,6 +80,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           layout="showcase"
           imageFit={isSlideDeck ? "contain" : "cover"}
           interactive={!isSlideDeck}
+          slideLinks={slideLinks}
         />
       </section>
 
