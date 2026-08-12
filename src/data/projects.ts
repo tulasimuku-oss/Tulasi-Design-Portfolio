@@ -37,7 +37,7 @@ export const projects: Project[] = [
     title: "Caelum - A Dynamic Spatial Experience",
     year: "2024",
     category: "ui",
-    featured: true,
+    featured: false,
     coverImage: "/projects/caelum/cover.png",
     featuredCoverImage: "/projects/caelum/cover.png",
   },
@@ -118,10 +118,11 @@ export const projects: Project[] = [
     title: "Insnap Technologies Pvt Ltd",
     year: "",
     category: "ui",
-    featured: false,
+    featured: true,
     description:
       "My one year of full time experience designing for multiple brands under Insnap Technologies., from July 2025 to July 2026",
     coverImage: "/projects/insnap/cover.png",
+    featuredCoverImage: "/projects/insnap/cover.png",
   },
 ];
 
@@ -130,7 +131,7 @@ export function getProject(slug: string): Project | undefined {
 }
 
 export function getFeaturedProjects(): Project[] {
-  const featuredOrder = ["namma-metro", "caelum"];
+  const featuredOrder = ["insnap", "namma-metro"];
   return featuredOrder
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter((p): p is Project => Boolean(p));
@@ -145,9 +146,9 @@ export function getProjectsByCategory(category: ProjectCategory): Project[] {
       "library-management",
     ],
     ui: [
+      "insnap",
       "caelum",
       "budgee",
-      "insnap",
       "liveasy",
       "myco-interiors",
       "upi-device",

@@ -8,15 +8,6 @@ import { categories } from "@/data/site";
 
 const portals = [
   {
-    id: "ux" as const,
-    label: categories.ux.label,
-    description: categories.ux.description,
-    href: categories.ux.href,
-    image: "/explore/ux-service-design.png",
-    tint: "from-sky-400/25 via-peri/20 to-transparent",
-    glow: "group-hover:shadow-[0_24px_80px_rgba(56,189,248,0.18)]",
-  },
-  {
     id: "ui" as const,
     label: categories.ui.label,
     description: categories.ui.description,
@@ -24,6 +15,15 @@ const portals = [
     image: "/explore/ui-visual-design.png",
     tint: "from-fuchsia-400/20 via-peri/25 to-transparent",
     glow: "group-hover:shadow-[0_24px_80px_rgba(192,132,252,0.2)]",
+  },
+  {
+    id: "ux" as const,
+    label: categories.ux.label,
+    description: categories.ux.description,
+    href: categories.ux.href,
+    image: "/explore/ux-service-design.png",
+    tint: "from-sky-400/25 via-peri/20 to-transparent",
+    glow: "group-hover:shadow-[0_24px_80px_rgba(56,189,248,0.18)]",
   },
 ];
 
