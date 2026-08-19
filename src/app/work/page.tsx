@@ -59,7 +59,7 @@ export default function WorkPage() {
         const sectionProjects = getProjectsByCategory(category);
         if (sectionProjects.length === 0) return null;
 
-        const defaultOpen = focusedCategory ? category === focusedCategory : true;
+        const defaultOpen = focusedCategory ? category === focusedCategory : false;
 
         return (
           <CollapsibleWorkCategory
