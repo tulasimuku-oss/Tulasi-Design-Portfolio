@@ -59,8 +59,7 @@ body {
 .glass-frame,
 .glass-pill,
 .glass-caption,
-.portal-panel,
-.skillset-panel {
+.portal-panel {
   position: relative;
   overflow: hidden;
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate))
@@ -76,8 +75,7 @@ body {
 .glass-panel::after,
 .glass-card::after,
 .glass-frame::after,
-.portal-panel::after,
-.skillset-panel::after {
+.portal-panel::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -108,8 +106,28 @@ body {
 .portal-panel > .portal-panel__backdrop {
   position: absolute;
   inset: 0;
-  z-index: 1;
   overflow: hidden;
+}
+
+.portal-panel > .portal-panel__backdrop-image {
+  z-index: 0;
+}
+
+.portal-panel > .portal-panel__backdrop-tint {
+  z-index: 1;
+}
+
+.portal-panel__backdrop-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: saturate(0.68);
+  transform: scale(1);
+}
+
+.portal-panel__backdrop-image--active {
+  filter: saturate(1);
+  transform: scale(1.05);
 }
 
 .portal-panel > .portal-panel__frost {
@@ -526,24 +544,6 @@ body {
   .portal-panel:focus-within {
     transform: none;
   }
-}
-
-.skillset-panel {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 1.75rem;
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.38),
-    0 4px 24px rgba(0, 0, 0, 0.18);
-}
-
-.skillset-item {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.skillset-item:focus-visible {
-  outline: 2px solid var(--peri-glow);
-  outline-offset: 2px;
 }
 
 .tool-capsule {

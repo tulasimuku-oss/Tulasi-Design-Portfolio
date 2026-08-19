@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { categories } from "@/data/site";
@@ -12,7 +11,7 @@ const portals = [
     label: categories.ui.label,
     description: categories.ui.description,
     href: categories.ui.href,
-    image: "/explore/ui-visual-design.png",
+    image: "/explore/ui-devices-line-drawing.png",
     tint: "from-fuchsia-400/20 via-peri/25 to-transparent",
     glow: "group-hover:shadow-[0_24px_80px_rgba(192,132,252,0.2)]",
   },
@@ -21,7 +20,7 @@ const portals = [
     label: categories.ux.label,
     description: categories.ux.description,
     href: categories.ux.href,
-    image: "/explore/ux-service-design.png",
+    image: "/explore/ux-brain-line-drawing.png",
     tint: "from-sky-400/25 via-peri/20 to-transparent",
     glow: "group-hover:shadow-[0_24px_80px_rgba(56,189,248,0.18)]",
   },
@@ -58,25 +57,21 @@ export function CategoryPortals() {
               onFocus={() => setActiveId(portal.id)}
               onBlur={() => setActiveId(null)}
             >
-              <div className="portal-panel__backdrop">
-                <Image
-                  src={portal.image}
-                  alt=""
-                  fill
-                  priority
-                  className={`object-cover transition-all duration-700 ${
-                    isActive
-                      ? "scale-105 saturate-100"
-                      : "scale-100 saturate-[0.68]"
-                  }`}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${portal.tint} transition-opacity duration-500 ${
-                    isActive ? "opacity-35" : "opacity-20"
-                  }`}
-                />
-              </div>
+              <div
+                className={`portal-panel__backdrop portal-panel__backdrop-image transition-all duration-700 ${
+                  isActive
+                    ? "portal-panel__backdrop-image--active"
+                    : ""
+                }`}
+                style={{ backgroundImage: `url(${portal.image})` }}
+                aria-hidden
+              />
+              <div
+                className={`portal-panel__backdrop portal-panel__backdrop-tint bg-gradient-to-br ${portal.tint} transition-opacity duration-500 ${
+                  isActive ? "opacity-35" : "opacity-20"
+                }`}
+                aria-hidden
+              />
 
               <div className="portal-panel__frost" aria-hidden />
 
