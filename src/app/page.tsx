@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { HeroSection } from "@/components/HeroSection";
+import { HomeLoadingOverlay } from "@/components/HomeLoadingOverlay";
 import { IntroSection } from "@/components/IntroSection";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CategoryPortals } from "@/components/CategoryPortals";
@@ -10,6 +12,9 @@ export default function HomePage() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <HomeLoadingOverlay />
+      </Suspense>
       <HeroSection />
 
       <section className="relative px-6 pb-16 pt-2 md:pb-20 md:pt-4">
