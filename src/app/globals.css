@@ -859,6 +859,109 @@ body {
   animation-name: iso-diamond-b;
 }
 
+.project-carousel {
+  padding-bottom: 0.25rem;
+}
+
+.project-carousel__viewport {
+  container-type: inline-size;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-x;
+  padding: 0.55rem 0 0.85rem;
+}
+
+.project-carousel__viewport:active {
+  cursor: grabbing;
+}
+
+.project-carousel__track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+}
+
+.project-carousel__card {
+  flex: 0 0 auto;
+  transform-origin: center center;
+}
+
+.project-carousel .glass-card:hover {
+  transform: none;
+}
+
+.project-carousel__controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.15rem;
+  padding-bottom: 0.5rem;
+}
+
+.project-carousel__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.project-carousel__transport {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  padding: 0;
+  border-radius: 999px;
+  color: var(--bg-deep, #0a0914);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.project-carousel__transport:hover {
+  transform: scale(1.04);
+  background: #fff;
+}
+
+.project-carousel__transport[aria-pressed="true"] {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.project-carousel__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.55);
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  cursor: pointer;
+}
+
+.project-carousel__dot.is-active {
+  background: var(--peri-glow, #e0e1ff);
+  border-color: rgba(255, 255, 255, 0.85);
+  transform: scale(1.25);
+  box-shadow: 0 0 10px rgba(224, 225, 255, 0.55);
+}
+
+.project-carousel__dot:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .iso-object {
     animation: none !important;

@@ -69,6 +69,7 @@ export default function WorkPage() {
             projects={sectionProjects}
             sectionIndex={sectionIndex}
             defaultOpen={defaultOpen}
+            layout="carousel"
           />
         );
       })}

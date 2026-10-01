@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import type { Project } from "@/data/projects";
 
@@ -31,6 +32,7 @@ interface CollapsibleWorkCategoryProps {
   projects: Project[];
   sectionIndex: number;
   defaultOpen?: boolean;
+  layout?: "grid" | "carousel";
 }
 
 export function CollapsibleWorkCategory({
@@ -39,6 +41,7 @@ export function CollapsibleWorkCategory({
   projects,
   sectionIndex,
   defaultOpen = true,
+  layout = "grid",
 }: CollapsibleWorkCategoryProps) {
   const [open, setOpen] = useState(defaultOpen);
 
@@ -77,7 +80,11 @@ export function CollapsibleWorkCategory({
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
-              <ProjectGrid projects={projects} />
+              {layout === "carousel" ? (
+                <ProjectCarousel projects={projects} categoryLabel={label} />
+              ) : (
+                <ProjectGrid projects={projects} />
+              )}
             </motion.div>
           )}
         </AnimatePresence>

@@ -10,36 +10,32 @@ function safePathname(url: string): string {
   }
 }
 
-export function shouldPlayHomeIntro(options?: { force?: boolean }): boolean {
-  if (typeof window === "undefined") return false;
+/** Whether this full page load qualified for the intro (computed once per document). */
+let initialIntroEligible: boolean | null = null;
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return false;
-  }
+/** Intro already started or skipped for this document — blocks replays on client nav to `/`. */
+let introConsumedForDocument = false;
 
-  if (options?.force) {
-    return true;
-  }
-
+function computeInitialIntroEligible(): boolean {
   const nav = performance.getEntriesByType("navigation")[0] as
     | PerformanceNavigationTiming
     | undefined;
+
   if (!nav) {
-    return window.location.pathname === "/";
-  }
-
-  const initialPath = safePathname(nav.name);
-  const currentPath = window.location.pathname;
-
-  if (currentPath === "/" && initialPath !== "/") {
     return false;
   }
 
+  const landingPath = safePathname(nav.name);
+
   if (nav.type === "reload") {
-    return true;
+    return landingPath === "/";
   }
 
   if (nav.type === "navigate") {
+    if (landingPath !== "/") {
+      return false;
+    }
+
     if (sessionStorage.getItem(INTRO_SEEN_KEY) === "1") {
       return false;
     }
@@ -59,6 +55,33 @@ export function shouldPlayHomeIntro(options?: { force?: boolean }): boolean {
   }
 
   return false;
+}
+
+export function shouldPlayHomeIntro(options?: { force?: boolean }): boolean {
+  if (typeof window === "undefined") return false;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return false;
+  }
+
+  if (options?.force) {
+    return true;
+  }
+
+  if (introConsumedForDocument) {
+    return false;
+  }
+
+  if (initialIntroEligible === null) {
+    initialIntroEligible = computeInitialIntroEligible();
+  }
+
+  if (!initialIntroEligible || window.location.pathname !== "/") {
+    return false;
+  }
+
+  introConsumedForDocument = true;
+  return true;
 }
 
 export function markHomeIntroSeen(): void {

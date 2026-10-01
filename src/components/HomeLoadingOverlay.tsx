@@ -41,9 +41,16 @@ export function HomeLoadingOverlay() {
     const video = videoRef.current;
     if (!video) return;
 
+    const safetyMs = 45_000;
+    const safetyTimer = window.setTimeout(() => {
+      finishIntro();
+    }, safetyMs);
+
     void video.play().catch(() => {
       finishIntro();
     });
+
+    return () => window.clearTimeout(safetyTimer);
   }, [phase, finishIntro]);
 
   useEffect(() => {
@@ -77,6 +84,7 @@ export function HomeLoadingOverlay() {
             playsInline
             preload="auto"
             onEnded={finishIntro}
+            onError={finishIntro}
           />
         </motion.div>
       )}

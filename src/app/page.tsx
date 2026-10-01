@@ -48,6 +48,31 @@ export default function HomePage() {
       </section>
 
       <IntroSection />
+
+      <footer className="relative px-6 pb-12 pt-2 md:pb-16">
+        <div className="mx-auto max-w-6xl text-center">
+          <p className="text-xs leading-relaxed text-text-muted md:text-sm">
+            Loading animation made using{" "}
+            <a
+              href="https://atomtypelab.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-subtle underline decoration-white/20 underline-offset-2 transition-colors hover:text-peri-glow"
+            >
+              Atom Type Lab
+            </a>{" "}
+            by{" "}
+            <a
+              href="https://davidfucsku.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-subtle underline decoration-white/20 underline-offset-2 transition-colors hover:text-peri-glow"
+            >
+              David Fucsku
+            </a>
+          </p>
+        </div>
+      </footer>
     </>
   );
 }
