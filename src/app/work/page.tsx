@@ -46,7 +46,7 @@ export default function WorkPage() {
     <div className="pb-20 pt-28 md:pt-24">
       <div className="mx-auto max-w-6xl px-6">
         <AnimatedSection>
-          <div className="glass-panel glow-soft mb-10 p-6 md:mb-12 md:p-8">
+          <div className="glass-panel glow-soft mb-8 p-6 md:mb-12 md:p-8">
             <p className="label-caps text-peri-glow">Portfolio</p>
             <h1 className="mt-2 text-3xl font-medium text-text-primary md:text-4xl">
               All Work

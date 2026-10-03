@@ -868,6 +868,22 @@ body.home-intro-active header {
   padding-bottom: 0.25rem;
 }
 
+@media (max-width: 767px) {
+  .project-carousel--single {
+    padding-bottom: 0.15rem;
+  }
+
+  .project-carousel--single .project-carousel__viewport {
+    padding: 0.25rem 0 0.5rem;
+  }
+
+  .project-carousel--single .project-carousel__controls {
+    gap: 0.7rem;
+    margin-top: 0.1rem;
+    padding-bottom: 0.35rem;
+  }
+}
+
 .project-carousel__viewport {
   container-type: inline-size;
   overflow: hidden;

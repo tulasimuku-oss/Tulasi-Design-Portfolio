@@ -52,7 +52,7 @@ export function CollapsibleWorkCategory({
   return (
     <section
       id={id}
-      className={`scroll-mt-24 ${sectionIndex > 0 ? "mt-12 md:mt-14" : ""}`}
+      className={`scroll-mt-24 ${sectionIndex > 0 ? "mt-10 md:mt-14" : ""}`}
     >
       <div className="mx-auto max-w-6xl px-6">
         <AnimatedSection delay={sectionIndex * 0.05}>
@@ -61,7 +61,7 @@ export function CollapsibleWorkCategory({
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-controls={`${id}-panel`}
-            className="glass mb-6 flex w-full items-center justify-between gap-4 rounded-2xl px-5 py-4 text-left transition-colors hover:border-white/40 md:mb-8 md:px-6 md:py-5"
+            className="glass mb-5 flex w-full items-center justify-between gap-4 rounded-2xl px-5 py-4 text-left transition-colors hover:border-white/40 md:mb-8 md:px-6 md:py-5"
           >
             <h2 className="text-xl font-medium text-text-primary md:text-2xl">
               {label}

@@ -21,8 +21,7 @@ interface ProjectCarouselProps {
 
 const LOOP_COPIES = 3;
 const TRACK_GAP_PX = 20;
-/** Mobile-only: scale tile width/height together (aspect ratio unchanged). */
-const MOBILE_TILE_SCALE = 1.12;
+const MOBILE_MAX_WIDTH_PX = 767;
 const FLIP_INTERVAL_MS = 4800;
 const SIDE_OPACITY = 0.68;
 const SIDE_SCALE = 0.8;
@@ -84,6 +83,7 @@ function CarouselCard({
   step,
   viewportWidth,
   cardWidth,
+  singleSlide,
 }: {
   project: Project;
   trackIndex: number;
@@ -91,6 +91,7 @@ function CarouselCard({
   step: number;
   viewportWidth: number;
   cardWidth: number;
+  singleSlide: boolean;
 }) {
   const cover = getProjectCover(project.slug, project.coverImage);
 
@@ -105,6 +106,9 @@ function CarouselCard({
       viewportWidth,
       latest,
     );
+    if (singleSlide) {
+      return { opacity: 1, scale: 1 };
+    }
     const slidesFromCenter = Math.abs(center - viewportWidth / 2) / step;
     const isCenter = slidesFromCenter <= 0.45;
     return {
@@ -167,6 +171,7 @@ export function ProjectCarousel({
 
   const [viewportWidth, setViewportWidth] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
+  const [singleSlide, setSingleSlide] = useState(false);
   const [step, setStep] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -180,13 +185,15 @@ export function ProjectCarousel({
     if (!viewport) return;
 
     const viewportW = viewport.getBoundingClientRect().width;
-    const baseTileWidth = Math.max(0, (viewportW - TRACK_GAP_PX * 2) / 3);
     const isMobile =
       typeof window !== "undefined" &&
-      window.matchMedia("(max-width: 767px)").matches;
-    const tileWidth = isMobile ? baseTileWidth * MOBILE_TILE_SCALE : baseTileWidth;
+      window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH_PX}px)`).matches;
+    const tileWidth = isMobile
+      ? viewportW
+      : Math.max(0, (viewportW - TRACK_GAP_PX * 2) / 3);
 
     setViewportWidth(viewportW);
+    setSingleSlide(isMobile);
     setCardWidth(tileWidth);
     setStep(tileWidth + TRACK_GAP_PX);
   }, []);
@@ -304,7 +311,7 @@ export function ProjectCarousel({
   if (count === 0) return null;
 
   return (
-    <div className="project-carousel">
+    <div className={`project-carousel${singleSlide ? " project-carousel--single" : ""}`}>
       <div
         ref={viewportRef}
         className="project-carousel__viewport"
@@ -357,6 +364,7 @@ export function ProjectCarousel({
               step={step}
               viewportWidth={viewportWidth}
               cardWidth={cardWidth}
+              singleSlide={singleSlide}
             />
           ))}
         </motion.div>
