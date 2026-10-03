@@ -195,6 +195,49 @@ body {
     inset 0 -1px 0 rgba(255, 255, 255, 0.08);
 }
 
+.hero-grid {
+  overflow: visible;
+}
+
+.hero-portrait-gif {
+  position: absolute;
+  z-index: 1;
+  background: transparent;
+  user-select: none;
+}
+
+.hero-portrait-gif__halftone {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #eef0ff;
+  opacity: 0.5;
+  mix-blend-mode: color-dodge;
+  -webkit-mask-image: url("/Portrait.gif");
+  mask-image: url("/Portrait.gif");
+  -webkit-mask-size: 115% 115%;
+  mask-size: 115% 115%;
+  -webkit-mask-position: center top;
+  mask-position: center top;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+}
+
+@media (min-width: 1024px) {
+  .hero-portrait-gif {
+    top: 0;
+    left: 0;
+    width: min(34rem, calc(100% + 5.5rem));
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-portrait-gif {
+    width: min(36rem, calc(100% + 6rem));
+  }
+}
+
 .hero-bio-panel {
   position: relative;
   overflow: hidden;

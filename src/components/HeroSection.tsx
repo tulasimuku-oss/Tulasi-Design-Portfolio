@@ -136,21 +136,32 @@ export function HeroSection() {
       className="relative flex min-h-[68svh] items-center px-6 pb-6 pt-24 md:min-h-[72svh] md:pb-8 md:pt-28"
     >
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-14">
-          <motion.div style={{ y: contentY, opacity: contentOpacity }}>
-            <FadeIn className="min-w-0">
+        <div className="hero-grid relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-14 lg:pt-2">
+          <motion.div
+            style={{ y: contentY, opacity: contentOpacity }}
+            className="relative min-w-0"
+          >
+            <FadeIn className="relative z-[2] min-w-0">
               <p className="label-caps text-peri-glow">Tulasi Mukunda</p>
               <p className="label-caps mt-2 text-text-subtle">UI/UX Designer</p>
               <div className="mt-5">
                 <KineticTagline />
               </div>
             </FadeIn>
+            <motion.div
+              className="hero-portrait-gif pointer-events-none hidden lg:block"
+              style={{ y: contentY }}
+              aria-hidden
+            >
+              <div className="hero-portrait-gif__halftone" />
+            </motion.div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-[3]"
           >
             <div className="hero-bio-panel">
               <div className="hero-bio-panel__glass" aria-hidden />
@@ -177,6 +188,7 @@ export function HeroSection() {
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
 
