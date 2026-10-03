@@ -21,6 +21,8 @@ interface ProjectCarouselProps {
 
 const LOOP_COPIES = 3;
 const TRACK_GAP_PX = 20;
+/** Mobile-only: scale tile width/height together (aspect ratio unchanged). */
+const MOBILE_TILE_SCALE = 1.12;
 const FLIP_INTERVAL_MS = 4800;
 const SIDE_OPACITY = 0.68;
 const SIDE_SCALE = 0.8;
@@ -131,7 +133,7 @@ function CarouselCard({
         ) : (
           <div className="aspect-video bg-gradient-to-br from-peri-dark to-bg-deep" />
         )}
-        <div className="glass-caption px-5 py-4">
+        <div className="glass-caption hidden px-5 py-4 md:block">
           <p className="text-base font-medium leading-snug text-text-primary transition-colors group-hover:text-peri-glow md:text-lg">
             {project.title}
           </p>
@@ -178,7 +180,11 @@ export function ProjectCarousel({
     if (!viewport) return;
 
     const viewportW = viewport.getBoundingClientRect().width;
-    const tileWidth = Math.max(0, (viewportW - TRACK_GAP_PX * 2) / 3);
+    const baseTileWidth = Math.max(0, (viewportW - TRACK_GAP_PX * 2) / 3);
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px)").matches;
+    const tileWidth = isMobile ? baseTileWidth * MOBILE_TILE_SCALE : baseTileWidth;
 
     setViewportWidth(viewportW);
     setCardWidth(tileWidth);

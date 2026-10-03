@@ -43,7 +43,7 @@ export default function WorkPage() {
   }, [focusedCategory]);
 
   return (
-    <div className="pb-20 pt-20 md:pt-24">
+    <div className="pb-20 pt-28 md:pt-24">
       <div className="mx-auto max-w-6xl px-6">
         <AnimatedSection>
           <div className="glass-panel glow-soft mb-10 p-6 md:mb-12 md:p-8">

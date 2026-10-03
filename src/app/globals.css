@@ -546,6 +546,11 @@ body {
   }
 }
 
+body.home-intro-active header {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .home-loading-overlay {
   position: fixed;
   inset: 0;

@@ -64,6 +64,12 @@ export function HomeLoadingOverlay() {
     return () => window.clearTimeout(timer);
   }, [phase]);
 
+  useEffect(() => {
+    const hideChrome = phase === "playing" || phase === "fading";
+    document.body.classList.toggle("home-intro-active", hideChrome);
+    return () => document.body.classList.remove("home-intro-active");
+  }, [phase]);
+
   return (
     <AnimatePresence>
       {(phase === "playing" || phase === "fading") && (
