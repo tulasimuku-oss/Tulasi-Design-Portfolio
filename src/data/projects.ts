@@ -42,6 +42,16 @@ export const projects: Project[] = [
     featuredCoverImage: "/projects/caelum/cover.png",
   },
   {
+    slug: "sarali-attendance-tracker",
+    title: "Sarali - Attendance Tracker",
+    year: "2025",
+    category: "ux",
+    featured: false,
+    description:
+      "Sarali is a mobile-first app for music teachers that simplifies adminstrative tasks so they can invest their time on helping students be their best self. From attendance tracking to event planning, this project aims to eliminate the need for multiple apps, loose papers or missing files",
+    coverImage: "/projects/sarali/cover.jpg",
+  },
+  {
     slug: "whatsapp-forums",
     title: "WhatsApp Forums - A study of Indian Agriculture",
     year: "2025",
@@ -138,6 +148,7 @@ export function getFeaturedProjects(): Project[] {
 export function getProjectsByCategory(category: ProjectCategory): Project[] {
   const order: Record<ProjectCategory, string[]> = {
     ux: [
+      "sarali-attendance-tracker",
       "whatsapp-forums",
       "namma-metro",
       "mingos-payment",
