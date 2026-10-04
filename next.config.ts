@@ -1,9 +1,13 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
+
+/** Always compile from Portfolio/, not the parent workspace folder. */
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   turbopack: {
-    root: path.resolve(process.cwd(), ".."),
+    root: projectRoot,
   },
   images: {
     remotePatterns: [

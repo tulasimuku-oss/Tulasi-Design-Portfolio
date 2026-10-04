@@ -86,7 +86,19 @@
     "https://cdn.myportfolio.com/0fb6fb61-828c-4e94-9246-e9e9754c08ef/b1c1d17e-a3b1-4c0c-b831-1373da07008c_rw_1920.jpg?h=70e78d50f1e2dfe26ec63947b0757415",
     "https://cdn.myportfolio.com/0fb6fb61-828c-4e94-9246-e9e9754c08ef/b321b0d9-c844-415b-b6b6-cfbf778f4650_rw_1920.jpg?h=1fdd67148e0a4f6e4a622ca1cf9430aa"
   ],
-  "sarali-attendance-tracker": [],
+  "sarali-attendance-tracker": [
+    "/projects/sarali/cover.jpg",
+    "/projects/sarali/in-this-project.jpg",
+    "/projects/sarali/phase-1.jpg",
+    "/projects/sarali/user-persona.jpg",
+    "/projects/sarali/empathy-map.jpg",
+    "/projects/sarali/hmw-statements.jpg",
+    "/projects/sarali/phase-2.jpg",
+    "/projects/sarali/mvp-features.jpg",
+    "/projects/sarali/mood-board.jpg",
+    "/projects/sarali/brand-board-v3.jpg",
+    "/projects/sarali/phase-3.jpg"
+  ],
   "mingos-payment": [],
   "caelum": [
     "https://cdn.myportfolio.com/0fb6fb61-828c-4e94-9246-e9e9754c08ef/e96cb93c-5f3f-46bc-8dc6-b9ac816380b1_rw_1920.jpg?h=9fd6776ad2d236ca9d5b74febb1dbe81",

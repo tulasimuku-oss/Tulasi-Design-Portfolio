@@ -55,9 +55,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
     slug === "myco-interiors" ||
     slug === "miyazaki-tribute" ||
     slug === "budgee";
-  const galleryImages = isSlideDeck
-    ? getProjectImages(slug)
-    : galleryWithoutCover(getProjectImages(slug), slug);
+  const saraliSlideDeck = slug === "sarali-attendance-tracker";
+  const galleryImages =
+    isSlideDeck || saraliSlideDeck
+      ? getProjectImages(slug)
+      : galleryWithoutCover(getProjectImages(slug), slug);
   const slideLinks = getProjectSlideLinks(slug);
 
   const related = projects
@@ -68,7 +70,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
     <article className="pb-16">
       <CaseStudyHero
         project={project}
-        showCoverImage={!isSlideDeck}
+        showCoverImage={!isSlideDeck && !saraliSlideDeck}
         showYear={!hideCaseStudyMeta}
         showNote={!hideCaseStudyMeta}
       />
