@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "Service Design- Namma Metro",
     year: "2024",
     category: "ux",
-    featured: true,
+    featured: false,
     description:
       "Bengaluru's metro system is expanding rapidly—but the experience of using it can still feel fragmented. I investigated how commuters navigate the metro system and identified opportunities to make the journey more seamless, transparent, and predictable.",
     coverImage: "/projects/namma-metro/cover.png",
@@ -46,10 +46,11 @@ export const projects: Project[] = [
     title: "Sarali - Attendance Tracker",
     year: "2025",
     category: "ux",
-    featured: false,
+    featured: true,
     description:
       "Sarali is a mobile-first app for music teachers that simplifies adminstrative tasks so they can invest their time on helping students be their best self. From attendance tracking to event planning, this project aims to eliminate the need for multiple apps, loose papers or missing files",
     coverImage: "/projects/sarali/cover.jpg",
+    featuredCoverImage: "/projects/sarali/cover.jpg",
   },
   {
     slug: "whatsapp-forums",
@@ -86,7 +87,7 @@ export const projects: Project[] = [
     category: "ui",
     featured: false,
     description:
-      "My experience designing for a start-up in the logistics feed. This project is an insight into the prototyping and research work I did which helped improve the overall quality of the product",
+      "My experience designing for a start-up in the logistics field. This project is an insight into the prototyping and research work I did which helped improve the overall quality of the product",
     coverImage: "/projects/liveasy/cover.png",
   },
   {
@@ -139,7 +140,7 @@ export function getProject(slug: string): Project | undefined {
 }
 
 export function getFeaturedProjects(): Project[] {
-  const featuredOrder = ["insnap", "namma-metro"];
+  const featuredOrder = ["insnap", "sarali-attendance-tracker"];
   return featuredOrder
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter((p): p is Project => Boolean(p));

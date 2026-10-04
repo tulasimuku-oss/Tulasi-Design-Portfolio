@@ -23,12 +23,11 @@ export type SkillId = (typeof skillset)[number]["id"];
 
 export const tools = [
   "Figma",
-  "Adobe XD",
-  "Photoshop",
-  "Illustrator",
+  "Cursor AI",
+  "Adobe Creative Cloud",
   "Microsoft Clipchamp",
   "Canva",
-  "Lovable.ai",
+  "Claude Design",
 ] as const;
 
 export const categories = {

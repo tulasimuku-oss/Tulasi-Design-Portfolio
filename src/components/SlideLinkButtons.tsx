@@ -19,10 +19,10 @@ export function SlideLinkButtons({ links }: SlideLinkButtonsProps) {
     >
       {links.map((link) => (
         <a
-          key={link.href}
+          key={`${link.href}-${link.label}`}
           href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={link.sameTab ? undefined : "_blank"}
+          rel={link.sameTab ? undefined : "noopener noreferrer"}
           className="slide-link-button"
         >
           {link.label}

@@ -7,14 +7,12 @@ import { getProjectCover, isRemotePortfolioImage } from "@/lib/project-images";
 interface CaseStudyHeroProps {
   project: Project;
   showCoverImage?: boolean;
-  showYear?: boolean;
   showNote?: boolean;
 }
 
 export function CaseStudyHero({
   project,
   showCoverImage = true,
-  showYear = true,
   showNote = true,
 }: CaseStudyHeroProps) {
   const heroImage = getProjectCover(project.slug, project.coverImage);
@@ -35,11 +33,6 @@ export function CaseStudyHero({
               <span className="glass-pill label-caps rounded-full px-3 py-1.5 text-peri-glow">
                 {categoryLabels[project.category]}
               </span>
-              {showYear && (
-                <span className="glass-pill rounded-full px-3 py-1.5 text-xs text-text-muted">
-                  {project.year}
-                </span>
-              )}
             </div>
 
             <h1 className="mt-6 text-4xl font-medium leading-tight text-text-primary md:text-5xl lg:text-6xl">

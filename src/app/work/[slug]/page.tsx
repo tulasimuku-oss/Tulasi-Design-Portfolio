@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BackToTopButton } from "@/components/BackToTopButton";
 import { CaseStudyHero } from "@/components/CaseStudyLayout";
 import { ProjectGallery } from "@/components/ProjectGallery";
-import { ProjectCard } from "@/components/ProjectCard";
 import { projects, getProject } from "@/data/projects";
 import { getProjectImages, getProjectCover } from "@/lib/project-images";
 import { getProjectSlideLinks } from "@/data/slide-links";
@@ -62,16 +61,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
       : galleryWithoutCover(getProjectImages(slug), slug);
   const slideLinks = getProjectSlideLinks(slug);
 
-  const related = projects
-    .filter((p) => p.category === project.category && p.slug !== project.slug)
-    .slice(0, 3);
-
   return (
-    <article className="pb-16">
+    <article id="case-study-top" className="pb-16">
       <CaseStudyHero
         project={project}
         showCoverImage={!isSlideDeck && !saraliSlideDeck}
-        showYear={!hideCaseStudyMeta}
         showNote={!hideCaseStudyMeta}
       />
 
@@ -101,29 +95,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </section>
       )}
 
-      {related.length > 0 && (
-        <section className="border-t border-white/5 px-6 py-16 md:py-20">
-          <div className="mx-auto max-w-6xl">
-            <h2 className="mb-8 text-2xl font-medium text-text-primary">
-              You may also like
-            </h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p, i) => (
-                <ProjectCard key={p.slug} project={p} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       <section className="px-6 py-10">
         <div className="mx-auto max-w-4xl text-center">
-          <Link
-            href="/work"
-            className="label-caps text-peri-glow transition-colors hover:text-text-primary"
-          >
+          <BackToTopButton className="label-caps text-peri-glow transition-colors hover:text-text-primary">
             ↑ Back to Top
-          </Link>
+          </BackToTopButton>
         </div>
       </section>
     </article>

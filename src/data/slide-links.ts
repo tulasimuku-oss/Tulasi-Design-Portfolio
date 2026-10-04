@@ -1,11 +1,27 @@
 export interface SlideLink {
   label: string;
   href: string;
+  /** Same-tab navigation (e.g. in-page anchor). Default opens in a new tab. */
+  sameTab?: boolean;
 }
 
 export const projectSlideLinks: Partial<
   Record<string, Record<number, SlideLink[]>>
 > = {
+  "sarali-attendance-tracker": {
+    0: [
+      {
+        label: "Play the interactive prototype (mobile view recommended)",
+        href: "https://sarali-attendance-tracker.vercel.app/",
+      },
+    ],
+    13: [
+      {
+        label: "View full project",
+        href: "https://sarali-attendance-tracker.vercel.app/",
+      },
+    ],
+  },
   insnap: {
     0: [{ label: "Main Page", href: "https://www.insnap.in/" }],
     2: [{ label: "ExpoCaptive Website", href: "https://www.expocaptive.com/" }],

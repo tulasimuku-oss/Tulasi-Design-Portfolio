@@ -1,0 +1,18 @@
+---
+description: Always keep dev preview reachable before finishing UI/content work
+alwaysApply: true
+---
+
+# Local preview (non-negotiable)
+
+When the user asks for portfolio changes they will preview in the browser:
+
+1. Do not mark work complete or say "refresh to see" until **http://127.0.0.1:3000/** returns success (e.g. 200).
+
+2. Verify yourself each time: start or restart with `npm run dev:clean` from this `Portfolio` folder when the port is down or hung; poll the URL until ready (up to ~60s on cold start).
+
+3. Do not assume an old dev server is still running.
+
+4. If preview cannot start, state the blocker—do not claim changes are viewable.
+
+Parent workspace also has `.cursor/rules/local-preview.mdc` (same policy).

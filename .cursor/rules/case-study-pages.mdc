@@ -1,0 +1,14 @@
+---
+description: Case study page layout — no year pill or related projects
+globs: src/app/work/**/*.tsx,src/components/CaseStudyLayout.tsx
+alwaysApply: false
+---
+
+# Case study pages
+
+Do **not** add or restore:
+
+- A **project year** pill/badge in `CaseStudyHero` (category label only).
+- A **"You may also like"** / related-projects section on `/work/[slug]` pages.
+
+New projects should use the gallery + optional prototype link + back link only.

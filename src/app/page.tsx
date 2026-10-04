@@ -52,7 +52,7 @@ export default function HomePage() {
       <footer className="relative px-6 pb-12 pt-2 md:pb-16">
         <div className="mx-auto max-w-6xl text-center">
           <p className="text-xs leading-relaxed text-text-muted md:text-sm">
-            Loading animation made using{" "}
+            Loading animation and portrait made using{" "}
             <a
               href="https://atomtypelab.com/"
               target="_blank"

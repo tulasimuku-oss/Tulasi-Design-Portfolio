@@ -89,6 +89,8 @@
   "sarali-attendance-tracker": [
     "/projects/sarali/cover.jpg",
     "/projects/sarali/in-this-project.jpg",
+    "/projects/sarali/introduction.jpg",
+    "/projects/sarali/problem-statement.jpg",
     "/projects/sarali/phase-1.jpg",
     "/projects/sarali/user-persona.jpg",
     "/projects/sarali/empathy-map.jpg",
@@ -97,7 +99,9 @@
     "/projects/sarali/mvp-features.jpg",
     "/projects/sarali/mood-board.jpg",
     "/projects/sarali/brand-board-v3.jpg",
-    "/projects/sarali/phase-3.jpg"
+    "/projects/sarali/phase-3.jpg",
+    "/projects/sarali/prototype-samples.jpg",
+    "/projects/sarali/features-for-mvp.jpg"
   ],
   "mingos-payment": [],
   "caelum": [
