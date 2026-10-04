@@ -62,7 +62,7 @@ export function ProjectGallery({
 
   return (
     <>
-      <div className="space-y-6 md:space-y-8">
+      <div className="project-gallery-showcase space-y-6 md:space-y-8">
         {images.map((src, i) => (
           <motion.div
             key={src}
@@ -70,7 +70,7 @@ export function ProjectGallery({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.35 }}
-            className="mx-auto max-w-6xl px-4"
+            className="project-gallery-showcase__slide mx-auto max-w-6xl px-0 md:px-4"
           >
             <GalleryImage
               src={src}
@@ -81,7 +81,9 @@ export function ProjectGallery({
               interactive={interactive}
             />
             {slideLinks?.[i] && (
-              <SlideLinkButtons links={slideLinks[i]} />
+              <div className="px-4 md:px-0">
+                <SlideLinkButtons links={slideLinks[i]} />
+              </div>
             )}
           </motion.div>
         ))}
@@ -122,8 +124,8 @@ function GalleryImage({
   const fitClass =
     imageFit === "contain" ? "object-contain" : "object-cover";
 
-  const frameClass = `glass-frame block w-full overflow-hidden ${className}`;
-  const imageClass = `h-auto w-full ${fitClass}${
+  const frameClass = `glass-frame project-gallery-showcase__frame block w-full overflow-hidden ${className}`;
+  const imageClass = `project-gallery-showcase__image h-auto w-full max-md:object-contain ${fitClass}${
     interactive ? " transition-transform duration-500 group-hover:scale-[1.01]" : ""
   }`;
 
@@ -148,9 +150,9 @@ function GalleryImage({
         />
       </LazyInView>
       {interactive && (
-        <div className="absolute inset-0 flex items-end justify-end bg-gradient-to-t from-bg-deep/40 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100">
-          <span className="glass-pill m-4 rounded-full px-4 py-2 text-xs text-text-muted">
-            Expand
+        <div className="project-gallery-showcase__expand-hint absolute inset-0 flex items-end justify-end bg-gradient-to-t from-bg-deep/40 via-transparent to-transparent opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
+          <span className="glass-pill m-3 rounded-full px-4 py-2 text-xs text-text-muted md:m-4">
+            Tap to view full size
           </span>
         </div>
       )}

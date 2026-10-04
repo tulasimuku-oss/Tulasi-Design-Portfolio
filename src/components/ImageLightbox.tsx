@@ -1,9 +1,8 @@
 "use client";
 
 import { useCallback, useEffect } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { optimizeGalleryUrl, isRemotePortfolioImage } from "@/lib/project-images";
+import { optimizeGalleryUrl } from "@/lib/project-images";
 
 interface ImageLightboxProps {
   images: string[];
@@ -22,6 +21,7 @@ export function ImageLightbox({
 }: ImageLightboxProps) {
   const hasPrev = currentIndex > 0;
   const hasNext = currentIndex < images.length - 1;
+  const src = optimizeGalleryUrl(images[currentIndex]);
 
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
@@ -47,70 +47,83 @@ export function ImageLightbox({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-bg-deep/80 backdrop-blur-xl"
-        onClick={onClose}
+        className="image-lightbox fixed inset-0 z-[100] flex flex-col bg-bg-deep/92 backdrop-blur-xl"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Full size image view"
       >
-        <button
-          type="button"
-          onClick={onClose}
-          className="glass-pill absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full text-text-primary transition-colors hover:text-peri-glow"
-          aria-label="Close"
-        >
-          ✕
-        </button>
-
-        <p className="absolute left-6 top-6 text-sm text-text-muted">
-          {currentIndex + 1} / {images.length}
-        </p>
-
-        {hasPrev && (
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-white/10 px-4 py-3 md:px-6">
+          <p className="text-sm text-text-muted">
+            {currentIndex + 1} / {images.length}
+          </p>
+          <p className="hidden text-xs text-text-subtle sm:block">
+            Pinch or scroll to zoom · Esc to close
+          </p>
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onNavigate(currentIndex - 1);
-            }}
-            className="glass-pill absolute left-4 z-10 rounded-full px-4 py-3 text-text-primary transition-colors hover:text-peri-glow md:left-8"
-            aria-label="Previous image"
+            onClick={onClose}
+            className="glass-pill hidden min-h-11 min-w-11 items-center justify-center rounded-full text-text-primary transition-colors hover:text-peri-glow md:flex"
+            aria-label="Close full view"
           >
-            ←
+            ✕
           </button>
-        )}
+        </div>
 
-        {hasNext && (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onNavigate(currentIndex + 1);
-            }}
-            className="glass-pill absolute right-4 z-10 rounded-full px-4 py-3 text-text-primary transition-colors hover:text-peri-glow md:right-8"
-            aria-label="Next image"
-          >
-            →
-          </button>
-        )}
-
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.97 }}
-          transition={{ duration: 0.2 }}
-          className="relative mx-16 max-h-[85vh] max-w-6xl"
-          onClick={(e) => e.stopPropagation()}
+        <div
+          className="image-lightbox__scroll relative min-h-0 flex-1 overflow-auto overscroll-contain"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}
         >
-          <Image
-            src={optimizeGalleryUrl(images[currentIndex])}
-            alt={`${alt} — image ${currentIndex + 1}`}
-            width={1920}
-            height={1080}
-            className="max-h-[85vh] w-auto rounded-lg object-contain"
-            sizes="100vw"
-            priority
-            unoptimized={isRemotePortfolioImage(images[currentIndex])}
-          />
-        </motion.div>
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="flex min-h-full min-w-full items-start justify-center p-2 pb-24 md:items-center md:p-8 md:pb-8"
+          >
+            <img
+              src={src}
+              alt={`${alt} — image ${currentIndex + 1}`}
+              className="image-lightbox__image h-auto w-full max-w-none object-contain md:max-h-[85vh] md:w-auto md:max-w-[min(72rem,100%)]"
+              decoding="async"
+              draggable={false}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+
+          {hasPrev && (
+            <button
+              type="button"
+              onClick={() => onNavigate(currentIndex - 1)}
+              className="glass-pill absolute left-2 top-1/2 z-10 min-h-11 -translate-y-1/2 rounded-full px-3 py-3 text-text-primary transition-colors hover:text-peri-glow md:left-4 md:px-4"
+              aria-label="Previous image"
+            >
+              ←
+            </button>
+          )}
+
+          {hasNext && (
+            <button
+              type="button"
+              onClick={() => onNavigate(currentIndex + 1)}
+              className="glass-pill absolute right-2 top-1/2 z-10 min-h-11 -translate-y-1/2 rounded-full px-3 py-3 text-text-primary transition-colors hover:text-peri-glow md:right-4 md:px-4"
+              aria-label="Next image"
+            >
+              →
+            </button>
+          )}
+        </div>
+
+        <div className="shrink-0 border-t border-white/10 bg-bg-deep/90 px-4 py-3 backdrop-blur-md md:hidden">
+          <p className="mb-2 text-center text-xs text-text-subtle">
+            Pinch to zoom on the image
+          </p>
+          <button type="button" onClick={onClose} className="cta-button w-full py-3">
+            Close full view
+          </button>
+        </div>
       </motion.div>
     </AnimatePresence>
   );

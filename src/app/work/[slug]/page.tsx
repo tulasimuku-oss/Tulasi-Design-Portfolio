@@ -74,8 +74,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
           images={galleryImages}
           title={project.title}
           layout="showcase"
-          imageFit={isSlideDeck ? "contain" : "cover"}
-          interactive={!isSlideDeck}
+          imageFit={isSlideDeck || saraliSlideDeck ? "contain" : "cover"}
+          interactive
           slideLinks={slideLinks}
         />
       </section>

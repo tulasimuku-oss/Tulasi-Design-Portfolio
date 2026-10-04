@@ -1026,6 +1026,29 @@ body.home-intro-active header {
   border-color: rgba(255, 255, 255, 0.55);
 }
 
+@media (max-width: 767px) {
+  .project-gallery-showcase__slide {
+    max-width: 100%;
+  }
+
+  .project-gallery-showcase__frame {
+    border-radius: 0;
+  }
+
+  .project-gallery-showcase__image.object-cover {
+    object-fit: contain;
+  }
+}
+
+.image-lightbox__scroll {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.image-lightbox__image {
+  touch-action: pinch-zoom;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .iso-object {
     animation: none !important;

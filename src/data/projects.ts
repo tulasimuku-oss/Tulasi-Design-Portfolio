@@ -48,7 +48,7 @@ export const projects: Project[] = [
     category: "ux",
     featured: true,
     description:
-      "Sarali is a mobile-first app for music teachers that simplifies adminstrative tasks so they can invest their time on helping students be their best self. From attendance tracking to event planning, this project aims to eliminate the need for multiple apps, loose papers or missing files",
+      "Sarali is a mobile-first app for music teachers that simplifies adminstrative tasks so they can invest their time on helping students be their best selves. From attendance tracking to event planning, this project aims to eliminate the need for multiple apps, loose papers or missing files",
     coverImage: "/projects/sarali/cover.jpg",
     featuredCoverImage: "/projects/sarali/cover.jpg",
   },
