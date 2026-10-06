@@ -89,33 +89,33 @@ function KineticTagline() {
         ))}
       </span>
 
-      <span>I turn </span>
-      <LayoutGroup id="kinetic-tagline">
-        <motion.span
-          className="inline-block h-[1.15em] overflow-hidden align-bottom"
-          animate={{ width: activeWidth ?? "auto" }}
-          transition={wordTransition}
-          style={activeWidth ? { width: activeWidth } : undefined}
-        >
-          <span className="relative block h-full">
-            <AnimatePresence initial={false}>
-              <motion.span
-                key={activeWord}
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-100%" }}
-                transition={wordTransition}
-                className="kinetic-highlight absolute left-0 top-0 whitespace-nowrap will-change-transform"
-              >
-                {activeWord}
-              </motion.span>
-            </AnimatePresence>
-          </span>
-        </motion.span>
-        <motion.span layout="position" transition={wordTransition}>
-          {" into better experiences."}
-        </motion.span>
-      </LayoutGroup>
+      <span className="block">
+        <span>I turn </span>
+        <LayoutGroup id="kinetic-tagline">
+          <motion.span
+            className="inline-block h-[1.15em] overflow-hidden align-bottom"
+            animate={{ width: activeWidth ?? "auto" }}
+            transition={wordTransition}
+            style={activeWidth ? { width: activeWidth } : undefined}
+          >
+            <span className="relative block h-full">
+              <AnimatePresence initial={false}>
+                <motion.span
+                  key={activeWord}
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-100%" }}
+                  transition={wordTransition}
+                  className="kinetic-highlight absolute left-0 top-0 whitespace-nowrap will-change-transform"
+                >
+                  {activeWord}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+          </motion.span>
+        </LayoutGroup>
+      </span>
+      <span className="mt-1 block text-text-primary">into better experiences.</span>
     </h1>
   );
 }

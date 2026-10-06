@@ -22,7 +22,6 @@ interface ProjectCarouselProps {
 const LOOP_COPIES = 3;
 const TRACK_GAP_PX = 20;
 const MOBILE_MAX_WIDTH_PX = 767;
-const FLIP_INTERVAL_MS = 4800;
 const SIDE_OPACITY = 0.68;
 const SIDE_SCALE = 0.8;
 
@@ -48,30 +47,39 @@ function cardCenterInViewport(
   return lead + trackIndex * step + cardWidth / 2 + trackX;
 }
 
-function CarouselAutoScrollToggle({
-  paused,
-  onToggle,
+function CarouselArrow({
+  direction,
+  onClick,
 }: {
-  paused: boolean;
-  onToggle: () => void;
+  direction: "prev" | "next";
+  onClick: () => void;
 }) {
+  const label =
+    direction === "prev" ? "Previous project" : "Next project";
+
   return (
     <button
       type="button"
-      className="project-carousel__transport"
-      aria-pressed={paused}
-      aria-label={paused ? "Play automatic carousel scroll" : "Pause automatic carousel scroll"}
-      onClick={onToggle}
+      className="project-carousel__arrow"
+      aria-label={label}
+      onClick={onClick}
     >
-      {paused ? (
-        <svg viewBox="0 0 24 24" className="h-[0.95rem] w-[0.95rem]" fill="currentColor" aria-hidden>
-          <path d="M8 5.14v13.72c0 .79.87 1.27 1.54.84l11.02-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 24 24" className="h-[0.95rem] w-[0.95rem]" fill="currentColor" aria-hidden>
-          <path d="M6 5h4v14H6V5Zm8 0h4v14h-4V5Z" />
-        </svg>
-      )}
+      <svg
+        viewBox="0 0 24 24"
+        className="h-3.5 w-3.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        {direction === "prev" ? (
+          <path d="m15 18-6-6 6-6" />
+        ) : (
+          <path d="m9 18 6-6-6-6" />
+        )}
+      </svg>
     </button>
   );
 }
@@ -156,9 +164,6 @@ export function ProjectCarousel({
   const dragOrigin = useRef(0);
   const didDrag = useRef(false);
   const isDragging = useRef(false);
-  const autoPaused = useRef(false);
-  const userPausedRef = useRef(false);
-  const pauseTimer = useRef<number | null>(null);
 
   const count = projects.length;
   const loopItems = useMemo(
@@ -174,8 +179,6 @@ export function ProjectCarousel({
   const [singleSlide, setSingleSlide] = useState(false);
   const [step, setStep] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [userPaused, setUserPaused] = useState(false);
 
   const x = useMotionValue(0);
   const loopSpan = count * step;
@@ -211,33 +214,6 @@ export function ProjectCarousel({
     [count, loopSpan],
   );
 
-  const pauseAuto = useCallback(() => {
-    autoPaused.current = true;
-    if (pauseTimer.current) window.clearTimeout(pauseTimer.current);
-    pauseTimer.current = window.setTimeout(() => {
-      if (!userPausedRef.current) {
-        autoPaused.current = false;
-      }
-    }, 3200);
-  }, []);
-
-  const toggleUserPaused = useCallback(() => {
-    setUserPaused((value) => {
-      const next = !value;
-      userPausedRef.current = next;
-      if (next) {
-        autoPaused.current = true;
-      } else if (!isDragging.current) {
-        autoPaused.current = false;
-      }
-      return next;
-    });
-  }, []);
-
-  useEffect(() => {
-    setReduceMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
-
   useEffect(() => {
     if (!step || count === 0) return;
     x.set(-count * step);
@@ -253,7 +229,6 @@ export function ProjectCarousel({
       cancelAnimationFrame(frame);
       observer.disconnect();
       window.removeEventListener("resize", measure);
-      if (pauseTimer.current) window.clearTimeout(pauseTimer.current);
     };
   }, [measure, loopItems.length]);
 
@@ -276,27 +251,18 @@ export function ProjectCarousel({
     [step, x],
   );
 
-  const advanceSlide = useCallback(() => {
-    if (!step || count <= 1) return;
-    const currentRaw = Math.round(-x.get() / step);
-    snapToRawIndex(currentRaw + 1);
-  }, [count, snapToRawIndex, step, x]);
-
-  useEffect(() => {
-    if (!step || count <= 1 || reduceMotion || userPaused) return;
-
-    const id = window.setInterval(() => {
-      if (isDragging.current || autoPaused.current) return;
-      advanceSlide();
-    }, FLIP_INTERVAL_MS);
-
-    return () => window.clearInterval(id);
-  }, [advanceSlide, count, reduceMotion, step, userPaused]);
+  const stepBySlide = useCallback(
+    (delta: number) => {
+      if (!step || count <= 1) return;
+      const currentRaw = Math.round(-x.get() / step);
+      snapToRawIndex(currentRaw + delta);
+    },
+    [count, snapToRawIndex, step, x],
+  );
 
   const snapToProjectIndex = useCallback(
     (projectIndex: number) => {
       if (!step || !count) return;
-      pauseAuto();
       const currentRaw = Math.round(-x.get() / step);
       const currentMod = mod(currentRaw, count);
       let delta = projectIndex - currentMod;
@@ -305,7 +271,7 @@ export function ProjectCarousel({
       const targetRaw = currentRaw + delta;
       snapToRawIndex(targetRaw);
     },
-    [count, pauseAuto, snapToRawIndex, step, x],
+    [count, snapToRawIndex, step, x],
   );
 
   if (count === 0) return null;
@@ -334,7 +300,6 @@ export function ProjectCarousel({
             isDragging.current = true;
             dragOrigin.current = x.get();
             didDrag.current = false;
-            pauseAuto();
           }}
           onDrag={() => {
             if (Math.abs(x.get() - dragOrigin.current) > 8) didDrag.current = true;
@@ -342,7 +307,6 @@ export function ProjectCarousel({
           }}
           onDragEnd={(_, info) => {
             isDragging.current = false;
-            pauseAuto();
             if (!step) return;
             const projected = wrapX(x.get() + info.velocity.x * 0.08);
             const nearest = Math.round(-projected / step);
@@ -385,9 +349,10 @@ export function ProjectCarousel({
             ))}
           </div>
 
-          {!reduceMotion && (
-            <CarouselAutoScrollToggle paused={userPaused} onToggle={toggleUserPaused} />
-          )}
+          <div className="project-carousel__nav">
+            <CarouselArrow direction="prev" onClick={() => stepBySlide(-1)} />
+            <CarouselArrow direction="next" onClick={() => stepBySlide(1)} />
+          </div>
         </div>
       )}
     </div>
