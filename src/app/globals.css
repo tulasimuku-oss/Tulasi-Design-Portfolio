@@ -1080,11 +1080,25 @@ body.home-intro-active header {
 
 .image-lightbox__scroll {
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x pan-y pinch-zoom;
+  touch-action: pan-x pan-y;
+}
+
+.image-lightbox__zoom-wrap {
+  touch-action: none;
+  max-width: none;
 }
 
 .image-lightbox__image {
-  touch-action: pinch-zoom;
+  width: auto;
+  max-width: none;
+  min-width: min(100%, 100vw - 1rem);
+}
+
+@media (max-width: 767px) {
+  .image-lightbox__image {
+    min-width: 100%;
+    max-height: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
