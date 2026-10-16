@@ -66,10 +66,9 @@ export function ProjectGallery({
         {images.map((src, i) => (
           <motion.div
             key={src}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.35 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: i * 0.04 }}
             className="project-gallery-showcase__slide mx-auto max-w-6xl px-0 md:px-4"
           >
             <GalleryImage
@@ -121,6 +120,7 @@ function GalleryImage({
 }) {
   const optimized = optimizeGalleryUrl(src);
   const remoteCdn = isRemotePortfolioImage(optimized);
+  const localProjectAsset = optimized.startsWith("/projects/");
   const fitClass =
     imageFit === "contain" ? "object-contain" : "object-cover";
 
@@ -135,7 +135,7 @@ function GalleryImage({
         imageFit === "contain" ? "bg-[rgba(10,9,20,0.55)]" : ""
       }`}
     >
-      <LazyInView eager={index < 2}>
+      <LazyInView eager>
         <Image
           src={optimized}
           alt={alt}
@@ -144,9 +144,8 @@ function GalleryImage({
           className={imageClass}
           sizes="(max-width: 768px) 100vw, 1200px"
           quality={70}
-          priority={index < 2}
-          loading={index < 2 ? undefined : "lazy"}
-          unoptimized={remoteCdn}
+          priority={index < 4}
+          unoptimized={remoteCdn || localProjectAsset}
         />
       </LazyInView>
       {interactive && (
