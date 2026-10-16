@@ -139,7 +139,7 @@ export const projects: Project[] = [
     year: "",
     category: "ui",
     featured: false,
-    coverImage: "/projects/logofolio-2026/cover.png",
+    coverImage: "/projects/logofolio-2026/logofolio-cover.png",
   },
 ];
 
