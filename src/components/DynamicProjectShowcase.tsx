@@ -102,7 +102,7 @@ export function DynamicProjectShowcase({
 
               <div className="glass-caption shrink-0 rounded-b-[calc(1.25rem-1px)] p-5 md:p-6">
                 <span className="label-caps text-peri-glow">
-                  {featured
+                  {featured || !project.year
                     ? categoryLabels[project.category]
                     : `${categoryLabels[project.category]} · ${project.year}`}
                 </span>

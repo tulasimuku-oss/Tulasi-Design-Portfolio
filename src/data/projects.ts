@@ -133,6 +133,14 @@ export const projects: Project[] = [
     coverImage: "/projects/insnap/cover.png",
     featuredCoverImage: "/projects/insnap/cover.png",
   },
+  {
+    slug: "logofolio-2026",
+    title: "Logofolio 2026",
+    year: "",
+    category: "ui",
+    featured: false,
+    coverImage: "/projects/logofolio-2026/cover.png?v=2",
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
@@ -157,6 +165,7 @@ export function getProjectsByCategory(category: ProjectCategory): Project[] {
     ],
     ui: [
       "insnap",
+      "logofolio-2026",
       "caelum",
       "budgee",
       "liveasy",

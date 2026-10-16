@@ -53,7 +53,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
     slug === "upi-device" ||
     slug === "myco-interiors" ||
     slug === "miyazaki-tribute" ||
-    slug === "budgee";
+    slug === "budgee" ||
+    slug === "logofolio-2026";
   const saraliSlideDeck = slug === "sarali-attendance-tracker";
   const galleryImages =
     isSlideDeck || saraliSlideDeck
@@ -74,7 +75,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
           images={galleryImages}
           title={project.title}
           layout="showcase"
-          imageFit={isSlideDeck || saraliSlideDeck ? "contain" : "cover"}
+          imageFit={
+            isSlideDeck || saraliSlideDeck || slug === "logofolio-2026"
+              ? "contain"
+              : "cover"
+          }
           interactive
           slideLinks={slideLinks}
         />
