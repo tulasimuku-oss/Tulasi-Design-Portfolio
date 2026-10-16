@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { LazyInView } from "@/components/LazyInView";
 import { SlideLinkButtons } from "@/components/SlideLinkButtons";
@@ -64,11 +63,8 @@ export function ProjectGallery({
     <>
       <div className="project-gallery-showcase space-y-6 md:space-y-8">
         {images.map((src, i) => (
-          <motion.div
+          <div
             key={src}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: i * 0.04 }}
             className="project-gallery-showcase__slide mx-auto max-w-6xl px-0 md:px-4"
           >
             <GalleryImage
@@ -84,7 +80,7 @@ export function ProjectGallery({
                 <SlideLinkButtons links={slideLinks[i]} />
               </div>
             )}
-          </motion.div>
+          </div>
         ))}
       </div>
 
