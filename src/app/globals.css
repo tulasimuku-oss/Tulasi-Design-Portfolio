@@ -513,6 +513,44 @@ label[for],
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
+.project-linkedin-connect {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 100%;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-primary, #f4f2ff);
+  background: rgba(10, 9, 20, 0.45);
+  border: 1px solid rgba(10, 102, 194, 0.55);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.project-linkedin-connect:hover {
+  border-color: rgba(10, 102, 194, 0.85);
+  background: rgba(10, 102, 194, 0.12);
+  transform: translateY(-1px);
+}
+
+.project-linkedin-connect__icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #0a66c2;
+}
+
 .glow-peri {
   box-shadow:
     0 0 60px rgba(102, 103, 171, 0.35),

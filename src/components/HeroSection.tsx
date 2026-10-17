@@ -182,7 +182,7 @@ export function HeroSection() {
                     onClick={() => setContactOpen(true)}
                     className="cta-button"
                   >
-                    Let&apos;s Get In Touch
+                    Let&apos;s Connect
                   </button>
                 </div>
               </div>

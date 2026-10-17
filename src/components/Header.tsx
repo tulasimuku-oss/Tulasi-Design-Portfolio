@@ -4,21 +4,41 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ContactDialog } from "@/components/ContactDialog";
 import { site } from "@/data/site";
 
-const navLinks = [
+type NavLink =
+  | {
+      href: string;
+      label: string;
+      match: (path: string) => boolean;
+    }
+  | {
+      label: string;
+      opensContactDialog: true;
+    };
+
+const baseNavLinks: NavLink[] = [
   { href: "/", label: "Home", match: (path: string) => path === "/" },
   {
     href: "/work",
     label: "All Projects",
     match: (path: string) => path === "/work" || path.startsWith("/work/"),
   },
-  {
-    href: site.linkedin,
-    label: "Contact",
-    external: true,
-  },
 ];
+
+const contactNavLink: NavLink = {
+  label: "Contact",
+  opensContactDialog: true,
+};
+
+function navLinksForPath(path: string): NavLink[] {
+  const onWorkHubOrCaseStudy =
+    path === "/work" || path.startsWith("/work/");
+  return onWorkHubOrCaseStudy
+    ? [...baseNavLinks, contactNavLink]
+    : baseNavLinks;
+}
 
 function navLinkClass(isActive: boolean) {
   return `label-caps rounded-full px-3.5 py-1.5 transition-all duration-300 ${
@@ -28,9 +48,22 @@ function navLinkClass(isActive: boolean) {
   }`;
 }
 
+function isRouteNavLink(
+  link: NavLink,
+): link is { href: string; label: string; match: (path: string) => boolean } {
+  return "href" in link;
+}
+
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const navLinks = navLinksForPath(pathname);
+
+  const openContact = () => {
+    setMenuOpen(false);
+    setContactOpen(true);
+  };
 
   return (
     <header className="fixed top-0 z-40 w-full px-4 pt-4 md:px-6">
@@ -53,23 +86,26 @@ export function Header() {
 
         <nav className="hidden items-center gap-2 md:flex">
           {navLinks.map((link) => {
-            const isActive = !link.external && link.match?.(pathname);
+            if (!isRouteNavLink(link)) {
+              return (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={openContact}
+                  className={navLinkClass(false)}
+                >
+                  {link.label}
+                </button>
+              );
+            }
 
-            return link.external ? (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={navLinkClass(false)}
-              >
-                {link.label}
-              </a>
-            ) : (
+            const isActive = link.match(pathname);
+
+            return (
               <Link
                 key={link.label}
                 href={link.href}
-                className={navLinkClass(Boolean(isActive))}
+                className={navLinkClass(isActive)}
               >
                 {link.label}
               </Link>
@@ -105,21 +141,24 @@ export function Header() {
             className="glass mx-auto mt-2 flex max-w-6xl flex-col gap-1 rounded-[1.25rem] p-3 md:hidden"
           >
             {navLinks.map((link) => {
-              const isActive = !link.external && link.match?.(pathname);
-              const className = `rounded-xl px-4 py-3 ${navLinkClass(Boolean(isActive))}`;
+              const className = `rounded-xl px-4 py-3 ${navLinkClass(
+                isRouteNavLink(link) ? link.match(pathname) : false,
+              )}`;
 
-              return link.external ? (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={className}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ) : (
+              if (!isRouteNavLink(link)) {
+                return (
+                  <button
+                    key={link.label}
+                    type="button"
+                    className={className}
+                    onClick={openContact}
+                  >
+                    {link.label}
+                  </button>
+                );
+              }
+
+              return (
                 <Link
                   key={link.label}
                   href={link.href}
@@ -133,6 +172,11 @@ export function Header() {
           </motion.nav>
         )}
       </AnimatePresence>
+
+      <ContactDialog
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+      />
     </header>
   );
 }

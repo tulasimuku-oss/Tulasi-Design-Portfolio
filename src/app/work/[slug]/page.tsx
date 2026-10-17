@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BackToTopButton } from "@/components/BackToTopButton";
+import { ProjectLinkedInConnect } from "@/components/ProjectLinkedInConnect";
 import { CaseStudyHero } from "@/components/CaseStudyLayout";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { projects, getProject } from "@/data/projects";
@@ -96,6 +97,12 @@ export default async function CaseStudyPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      <section className="px-6 pb-6 pt-4 md:pb-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <ProjectLinkedInConnect />
+        </div>
+      </section>
 
       <section className="px-6 py-10">
         <div className="mx-auto max-w-4xl text-center">
