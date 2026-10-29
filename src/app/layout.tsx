@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GradientBackground } from "@/components/GradientBackground";
 import { Header } from "@/components/Header";
+import { ProfileChatWidget } from "@/components/ProfileChatWidget";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <GradientBackground />
         <Header />
         <main className="relative z-10 flex-1">{children}</main>
+        <ProfileChatWidget />
       </body>
     </html>
   );
