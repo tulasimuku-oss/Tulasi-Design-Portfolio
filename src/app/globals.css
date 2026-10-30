@@ -149,6 +149,30 @@ label[for],
   z-index: 0;
 }
 
+.portal-panel__backdrop-video {
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  filter: saturate(0.68);
+  transform: scale(1);
+  transition:
+    opacity 0.45s ease,
+    filter 0.7s ease,
+    transform 0.7s ease;
+}
+
+.portal-panel__backdrop-video--active {
+  opacity: 1;
+  filter: saturate(1);
+  transform: scale(1.05);
+}
+
+.portal-panel__backdrop-image--video-playing {
+  opacity: 0;
+}
+
 .portal-panel > .portal-panel__backdrop-tint {
   z-index: 1;
 }
@@ -159,6 +183,10 @@ label[for],
   background-repeat: no-repeat;
   filter: saturate(0.68);
   transform: scale(1);
+  transition:
+    opacity 0.45s ease,
+    filter 0.7s ease,
+    transform 0.7s ease;
 }
 
 .portal-panel__backdrop-image--active {
