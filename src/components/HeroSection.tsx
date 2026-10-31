@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/data/site";
 import { FadeIn } from "@/components/AnimatedSection";
 import { ContactDialog } from "@/components/ContactDialog";
+import { useProfileChatOpen } from "@/hooks/useProfileChatOpen";
 
 const HIGHLIGHTS = [
   "deep research",
@@ -33,6 +34,8 @@ const wordTransition = {
 
 function KineticTagline() {
   const prefersReducedMotion = useReducedMotion();
+  const chatOpen = useProfileChatOpen();
+  const pauseMotion = prefersReducedMotion || chatOpen;
   const [phase, setPhase] = useState(0);
   const [wordWidths, setWordWidths] = useState<number[]>([]);
   const measureRef = useRef<HTMLSpanElement>(null);
@@ -58,14 +61,28 @@ function KineticTagline() {
   }, []);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (pauseMotion) return;
 
     const timer = window.setInterval(() => {
       setPhase((current) => (current + 1) % HIGHLIGHTS.length);
     }, CYCLE_MS);
 
     return () => window.clearInterval(timer);
-  }, [prefersReducedMotion]);
+  }, [pauseMotion]);
+
+  if (pauseMotion && !prefersReducedMotion) {
+    return (
+      <h1 className={HEADLINE_FONT}>
+        <span className="block">
+          <span>I turn </span>
+          <span className="kinetic-highlight whitespace-nowrap">{activeWord}</span>
+        </span>
+        <span className="mt-1 block text-text-primary">
+          into better experiences.
+        </span>
+      </h1>
+    );
+  }
 
   if (prefersReducedMotion) {
     return <h1 className={HEADLINE_FONT}>{site.tagline}</h1>;
@@ -123,6 +140,7 @@ function KineticTagline() {
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const [contactOpen, setContactOpen] = useState(false);
+  const chatOpen = useProfileChatOpen();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -138,7 +156,11 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <div className="hero-grid relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-14 lg:pt-2">
           <motion.div
-            style={{ y: contentY, opacity: contentOpacity }}
+            style={
+              chatOpen
+                ? { y: 0, opacity: 1 }
+                : { y: contentY, opacity: contentOpacity }
+            }
             className="relative min-w-0"
           >
             <FadeIn className="relative z-[2] min-w-0">
@@ -150,7 +172,7 @@ export function HeroSection() {
             </FadeIn>
             <motion.div
               className="hero-portrait-gif pointer-events-none hidden lg:block"
-              style={{ y: contentY }}
+              style={chatOpen ? { y: 0 } : { y: contentY }}
               aria-hidden
             >
               <div className="hero-portrait-gif__halftone" />

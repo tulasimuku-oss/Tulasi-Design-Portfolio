@@ -7,6 +7,7 @@ import {
   profileChatQuestions,
   type ProfileChatSession,
 } from "@/data/profile-chat";
+import { syncProfileChatOpenClass } from "@/hooks/useProfileChatOpen";
 
 function readSession(): ProfileChatSession {
   if (typeof window === "undefined") return emptyProfileChatSession();
@@ -39,6 +40,11 @@ export function ProfileChatWidget() {
   useEffect(() => {
     setSession(readSession());
   }, []);
+
+  useEffect(() => {
+    syncProfileChatOpenClass(session.isOpen);
+    return () => syncProfileChatOpenClass(false);
+  }, [session.isOpen]);
 
   const persist = useCallback((next: ProfileChatSession) => {
     setSession(next);
@@ -79,11 +85,17 @@ export function ProfileChatWidget() {
   return (
     <div className="profile-chat" aria-live="polite">
       {session.isOpen ? (
-        <div
-          className="profile-chat__panel"
-          role="dialog"
-          aria-label="Portfolio guide chat"
-        >
+        <>
+          <div className="profile-chat__scrim" aria-hidden />
+          <div
+            className={`profile-chat__panel${
+              session.askedIds.length > 0
+                ? " profile-chat__panel--has-messages"
+                : ""
+            }`}
+            role="dialog"
+            aria-label="Portfolio guide chat"
+          >
           <header className="profile-chat__header">
             <div>
               <p className="profile-chat__title">Quick guide</p>
@@ -135,7 +147,8 @@ export function ProfileChatWidget() {
               You&apos;ve explored all topics — close anytime
             </p>
           )}
-        </div>
+          </div>
+        </>
       ) : (
         <button
           type="button"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BackToTopButton } from "@/components/BackToTopButton";
+import { CaseStudyScrollProgress } from "@/components/CaseStudyScrollProgress";
 import { ProjectLinkedInConnect } from "@/components/ProjectLinkedInConnect";
 import { CaseStudyHero } from "@/components/CaseStudyLayout";
 import { ProjectGallery } from "@/components/ProjectGallery";
@@ -63,7 +64,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const slideLinks = getProjectSlideLinks(slug);
 
   return (
-    <article id="case-study-top" className="pb-16">
+    <>
+      <CaseStudyScrollProgress />
+      <article id="case-study-top" className="pb-16">
       <CaseStudyHero
         project={project}
         showCoverImage={!isSlideDeck && !saraliSlideDeck}
@@ -112,5 +115,6 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
     </article>
+    </>
   );
 }

@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { categories } from "@/data/site";
+import { useProfileChatOpen } from "@/hooks/useProfileChatOpen";
 
 const portals = [
   {
@@ -33,14 +34,28 @@ type PortalId = (typeof portals)[number]["id"];
 export function CategoryPortals() {
   const [activeId, setActiveId] = useState<PortalId | null>(null);
   const videoRefs = useRef<Partial<Record<PortalId, HTMLVideoElement>>>({});
+  const chatOpen = useProfileChatOpen();
 
-  const playPortalVideo = useCallback((id: PortalId) => {
-    setActiveId(id);
-    const video = videoRefs.current[id];
-    if (!video) return;
-    video.currentTime = 0;
-    void video.play().catch(() => {});
-  }, []);
+  useEffect(() => {
+    if (!chatOpen) return;
+    setActiveId(null);
+    (Object.values(videoRefs.current) as HTMLVideoElement[]).forEach((video) => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  }, [chatOpen]);
+
+  const playPortalVideo = useCallback(
+    (id: PortalId) => {
+      if (chatOpen) return;
+      setActiveId(id);
+      const video = videoRefs.current[id];
+      if (!video) return;
+      video.currentTime = 0;
+      void video.play().catch(() => {});
+    },
+    [chatOpen],
+  );
 
   const stopPortalVideo = useCallback((id: PortalId) => {
     setActiveId((current) => (current === id ? null : current));
