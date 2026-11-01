@@ -1170,8 +1170,10 @@ body.home-intro-active header {
 
 .profile-chat {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  left: auto;
+  top: auto;
   z-index: 45;
   max-width: calc(100vw - 2rem);
   font-size: 0.875rem;
@@ -1255,7 +1257,7 @@ body.home-intro-active header {
 
 .profile-chat__header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.9rem 1rem 0.75rem;
@@ -1273,6 +1275,13 @@ body.home-intro-active header {
   margin-top: 0.15rem;
   font-size: 0.75rem;
   color: var(--text-subtle);
+}
+
+.profile-chat__hint {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
 }
 
 .profile-chat__icon-btn {
@@ -1305,13 +1314,6 @@ body.home-intro-active header {
   background: #12111f;
 }
 
-.profile-chat__hint {
-  font-size: 0.8125rem;
-  line-height: 1.45;
-  color: var(--text-subtle);
-  margin-bottom: 0.25rem;
-}
-
 .profile-chat__bubble {
   max-width: 92%;
   border-radius: 1rem;
@@ -1329,9 +1331,9 @@ body.home-intro-active header {
 
 .profile-chat__bubble--assistant {
   align-self: flex-start;
-  color: var(--text-primary);
-  background: #25243d;
-  border: 1px solid rgba(224, 225, 255, 0.14);
+  color: #12111f;
+  background: #e8e7ff;
+  border: 1px solid #b8b9e8;
   border-bottom-left-radius: 0.35rem;
 }
 
@@ -1450,16 +1452,18 @@ body.profile-chat-open .animate-pulse-glow {
     pointer-events: none;
   }
 
-  .profile-chat {
+  .profile-chat--open {
     inset: 0;
+    top: 0;
     right: 0;
     bottom: 0;
+    left: 0;
     max-width: none;
     z-index: 200;
     filter: none;
   }
 
-  .profile-chat__panel {
+  .profile-chat--open .profile-chat__panel {
     position: relative;
     z-index: 1;
     width: 100%;

@@ -83,7 +83,10 @@ export function ProfileChatWidget() {
   };
 
   return (
-    <div className="profile-chat" aria-live="polite">
+    <div
+      className={`profile-chat${session.isOpen ? " profile-chat--open" : ""}`}
+      aria-live="polite"
+    >
       {session.isOpen ? (
         <>
           <div className="profile-chat__scrim" aria-hidden />
@@ -97,12 +100,7 @@ export function ProfileChatWidget() {
             aria-label="Portfolio guide chat"
           >
           <header className="profile-chat__header">
-            <div>
-              <p className="profile-chat__title">Quick guide</p>
-              <p className="profile-chat__subtitle">
-                Tap a question — no typing needed
-              </p>
-            </div>
+            <p className="profile-chat__title">Quick guide</p>
             <button
               type="button"
               className="profile-chat__icon-btn"
@@ -115,7 +113,8 @@ export function ProfileChatWidget() {
 
           <div ref={threadRef} className="profile-chat__thread">
             <p className="profile-chat__hint">
-              Choose a question below to learn more about this portfolio.
+              Choose a question below to learn more about this portfolio — no
+              typing needed
             </p>
             {messages.map((msg) => (
               <div
