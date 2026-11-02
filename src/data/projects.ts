@@ -139,6 +139,8 @@ export const projects: Project[] = [
     year: "",
     category: "ui",
     featured: false,
+    description:
+      "Disclaimer: None of these are real brands. They are solely meant to showcase my skills in brand identity, visual design and colour theory",
     coverImage: "/projects/logofolio-2026/logofolio-cover.png",
   },
 ];
