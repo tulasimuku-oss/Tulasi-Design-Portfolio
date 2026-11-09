@@ -21,7 +21,9 @@ import {
   HOME_INTRO_COMPLETE_EVENT,
   homeIntroCompleteAlreadyFired,
 } from "@/lib/home-intro";
+import { ProfileChatFloatingLauncher } from "@/components/ProfileChatFloatingLauncher";
 import { syncProfileChatOpenClass } from "@/hooks/useProfileChatOpen";
+import { useHomeIntroActive } from "@/hooks/useHomeIntroActive";
 
 function readSession(): ProfileChatSession {
   if (typeof window === "undefined") return emptyProfileChatSession();
@@ -63,24 +65,6 @@ export function useProfileChat() {
   return ctx;
 }
 
-function useHomeIntroActive() {
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    const sync = () =>
-      setActive(document.body.classList.contains("home-intro-active"));
-    sync();
-    const observer = new MutationObserver(sync);
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    return () => observer.disconnect();
-  }, []);
-
-  return active;
-}
-
 function ProfileChatOverlay() {
   const { session, closeChat, askQuestion } = useProfileChat();
   const homeIntroActive = useHomeIntroActive();
@@ -107,6 +91,17 @@ function ProfileChatOverlay() {
     if (!el || !session.isOpen) return;
     el.scrollTop = el.scrollHeight;
   }, [messages.length, session.isOpen, remainingQuestions.length]);
+
+  useEffect(() => {
+    if (!session.isOpen || homeIntroActive) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeChat();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [session.isOpen, homeIntroActive, closeChat]);
 
   if (!session.isOpen || homeIntroActive) return null;
 
@@ -282,6 +277,7 @@ export function ProfileChatProvider({ children }: { children: ReactNode }) {
   return (
     <ProfileChatContext.Provider value={value}>
       {children}
+      <ProfileChatFloatingLauncher />
       <ProfileChatOverlay />
     </ProfileChatContext.Provider>
   );

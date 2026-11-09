@@ -201,14 +201,24 @@ export function HeroSection() {
                 <div className="hero-bio-panel__actions">
                   <ProfileChatLauncher />
                   <Link href="/work" className="hero-bio-panel__projects-link">
-                    Projects
+                    <span className="hero-bio-panel__cta-label hero-bio-panel__cta-label--full">
+                      View All Projects
+                    </span>
+                    <span className="hero-bio-panel__cta-label hero-bio-panel__cta-label--short">
+                      Projects
+                    </span>
                   </Link>
                   <button
                     type="button"
                     onClick={() => setContactOpen(true)}
                     className="cta-button"
                   >
-                    Connect
+                    <span className="hero-bio-panel__cta-label hero-bio-panel__cta-label--full">
+                      Let&apos;s Connect
+                    </span>
+                    <span className="hero-bio-panel__cta-label hero-bio-panel__cta-label--short">
+                      Connect
+                    </span>
                   </button>
                 </div>
               </div>

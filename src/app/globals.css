@@ -451,31 +451,43 @@ label[for],
   transform: scale(1.02);
 }
 
-.hero-bio-panel__actions .profile-chat__launcher--hero-slot {
-  gap: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  animation: none;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  box-shadow: none;
-}
-
 .hero-bio-panel__actions .profile-chat__launcher-icon {
   flex: 0 0 auto;
-  height: 1.65rem;
-  width: 1.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.25rem;
+  width: 1.25rem;
   margin: 0;
-  font-size: 0;
-  color: transparent;
-  background: transparent;
-  border-radius: 0;
+  border-radius: 9999px;
+  color: var(--peri-deep);
+  background: #f0f0ff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+
+.hero-bio-panel__actions .profile-chat__launcher-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-bio-panel__cta-label--short {
+  display: none;
 }
 
 .profile-chat__guide-mark {
   display: block;
-  height: 100%;
-  width: 100%;
+  height: 0.8rem;
+  width: 0.8rem;
 }
 
 .glass-panel {
@@ -782,6 +794,13 @@ body.home-intro-active header {
 
 body.home-intro-active .profile-chat--open {
   display: none;
+}
+
+body.home-intro-active .profile-chat__launcher--hero-slot,
+body.home-intro-active .profile-chat__floating {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
 }
 
 .home-loading-overlay {
@@ -1325,7 +1344,51 @@ body.home-intro-active .profile-chat--open {
   padding-right: 0.15rem;
 }
 
+.profile-chat__floating {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right, 0px));
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  pointer-events: none;
+}
+
+.profile-chat__floating .profile-chat__launcher--floating {
+  pointer-events: auto;
+}
+
+.profile-chat__launcher--floating .profile-chat__launcher-icon--info {
+  height: 2rem;
+  width: 2rem;
+  color: var(--peri-deep);
+  background: #f0f0ff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+
+.profile-chat__guide-mark--floating {
+  height: 1.05rem;
+  width: 1.05rem;
+}
+
+.hero-bio-panel__actions .profile-chat__launcher {
+  padding: 0.75rem 0.5rem;
+  gap: 0.4rem;
+}
+
+.hero-bio-panel__actions .profile-chat__launcher-text {
+  letter-spacing: 0;
+  text-transform: none;
+  padding-right: 0;
+}
+
 @media (max-width: 767px) {
+  .hero-bio-panel__cta-label--full {
+    display: none;
+  }
+
+  .hero-bio-panel__cta-label--short {
+    display: inline;
+  }
+
   .hero-bio-panel__actions .hero-bio-panel__projects-link,
   .hero-bio-panel__actions .cta-button,
   .hero-bio-panel__actions .profile-chat__launcher {
@@ -1360,6 +1423,43 @@ body.home-intro-active .profile-chat--open {
 
   .hero-bio-panel__actions .hero-bio-panel__projects-link {
     transition: none;
+  }
+
+  .hero-bio-panel__actions .profile-chat__launcher--hero-slot {
+    gap: 0;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    box-shadow: none;
+  }
+
+  .hero-bio-panel__actions .profile-chat__launcher-text {
+    display: none;
+  }
+
+  .hero-bio-panel__actions .profile-chat__launcher-icon--info {
+    height: 1.65rem;
+    width: 1.65rem;
+  }
+
+  .hero-bio-panel__actions .profile-chat__guide-mark {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .profile-chat__floating .profile-chat__launcher--floating {
+    gap: 0;
+    padding: 0.65rem;
+    border-radius: 0.375rem;
+    animation: none;
+    transition: none;
+  }
+
+  .profile-chat__floating .profile-chat__launcher--floating:hover {
+    transform: none;
+  }
+
+  .profile-chat__floating .profile-chat__launcher-text {
+    display: none;
   }
 }
 
