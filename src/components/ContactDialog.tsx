@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useId } from "react";
 import { site } from "@/data/site";
 
 interface ContactDialogProps {
@@ -45,6 +45,39 @@ function LinkedInIcon() {
   );
 }
 
+function BehanceIcon() {
+  const knockoutId = useId();
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-8 w-8 shrink-0"
+      fill="currentColor"
+      aria-hidden
+    >
+      <defs>
+        <mask id={knockoutId}>
+          <rect width="24" height="24" fill="white" />
+          <text
+            x="12"
+            y="12.55"
+            textAnchor="middle"
+            dominantBaseline="central"
+            fill="black"
+            fontSize="12.25"
+            fontWeight={700}
+            fontFamily='system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            letterSpacing="-0.05em"
+          >
+            Bē
+          </text>
+        </mask>
+      </defs>
+      <circle cx="12" cy="12" r="12" mask={`url(#${knockoutId})`} />
+    </svg>
+  );
+}
+
 const contactLinks = [
   {
     label: "WhatsApp",
@@ -63,6 +96,12 @@ const contactLinks = [
     href: site.linkedin,
     external: true,
     icon: LinkedInIcon,
+  },
+  {
+    label: "Behance",
+    href: site.behance,
+    external: true,
+    icon: BehanceIcon,
   },
 ] as const;
 
@@ -115,7 +154,7 @@ export function ContactDialog({ open, onClose }: ContactDialogProps) {
               Contact options
             </p>
 
-            <div className="flex items-center justify-center gap-6 md:gap-8">
+            <div className="flex flex-wrap items-center justify-center gap-5 md:gap-6">
               {contactLinks.map(({ label, href, external, icon: Icon }) => (
                 <a
                   key={label}

@@ -15,6 +15,14 @@ export function Footer() {
             LinkedIn
           </a>
           <a
+            href={site.behance}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="label-caps text-text-muted transition-colors hover:text-peri-glow"
+          >
+            Behance
+          </a>
+          <a
             href={`mailto:${site.email}`}
             className="label-caps text-text-muted transition-colors hover:text-peri-glow"
           >

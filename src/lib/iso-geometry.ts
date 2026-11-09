@@ -77,7 +77,14 @@ export function wireFramePath(
   ].join(" ");
 }
 
-export type IsoShape = "pillar" | "beam-x" | "beam-y" | "frame" | "diamond" | "prism";
+export type IsoShape =
+  | "pillar"
+  | "beam-x"
+  | "beam-y"
+  | "frame"
+  | "diamond"
+  | "prism"
+  | "pyramid";
 
 export type IsoMotion =
   | "drift-a"
@@ -111,6 +118,34 @@ export interface IsoObject {
   origin?: string;
 }
 
+export function wirePyramidPath(
+  i: number,
+  j: number,
+  k: number,
+  di: number,
+  dj: number,
+  dk: number,
+) {
+  const b0 = iso(i, j, k);
+  const b1 = iso(i + di, j, k);
+  const b2 = iso(i + di, j + dj, k);
+  const b3 = iso(i, j + dj, k);
+  const apex = iso(i + di / 2, j + dj / 2, k + dk);
+
+  const base = [
+    `M ${b0.x} ${b0.y} L ${b1.x} ${b1.y}`,
+    `M ${b1.x} ${b1.y} L ${b2.x} ${b2.y}`,
+    `M ${b2.x} ${b2.y} L ${b3.x} ${b3.y}`,
+    `M ${b3.x} ${b3.y} L ${b0.x} ${b0.y}`,
+  ];
+
+  const sides = [b0, b1, b2, b3].map(
+    (p) => `M ${p.x} ${p.y} L ${apex.x} ${apex.y}`,
+  );
+
+  return [...base, ...sides].join(" ");
+}
+
 export function isoObjectPath(object: IsoObject): string {
   const { i, j, k, di, dj, dk, shape } = object;
 
@@ -120,6 +155,10 @@ export function isoObjectPath(object: IsoObject): string {
 
   if (shape === "diamond") {
     return wireFramePath(i, j, k, di, di, dk);
+  }
+
+  if (shape === "pyramid") {
+    return wirePyramidPath(i, j, k, di, dj, dk);
   }
 
   return wireBoxPath(i, j, k, di, dj, dk);

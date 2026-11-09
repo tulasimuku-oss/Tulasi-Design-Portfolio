@@ -7,6 +7,7 @@ export const site = {
   bio: "I'm Tulasi Mukunda, a UX designer with a background in visual communication and over 2 years of professional design experience. I combine research, empathy, and visual thinking to create experiences that are both useful and engaging.",
   availability: "Open to full-time UX/UI roles · Bengaluru & Remote",
   linkedin: "https://www.linkedin.com/in/tulasi-mukunda-83926b277/",
+  behance: "https://www.behance.net/tulasimuku97",
   email: "tulasimuku@gmail.com",
 } as const;
 

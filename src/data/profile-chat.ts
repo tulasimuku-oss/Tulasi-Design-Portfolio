@@ -32,7 +32,7 @@ export const profileChatQuestions: ProfileChatQuestion[] = [
     id: "contact",
     question: "How can I get in touch with Tulasi?",
     answer:
-      'You can reach out via LinkedIn, WhatsApp or email. The details can be found in the "Contact" section of the top nav bar, or the "Let\'s Connect" button on the home page.',
+      'You can reach out via LinkedIn, WhatsApp, email, or Behance. The details can be found in the "Contact" section of the top nav bar, or the "Let\'s Connect" button on the home page.',
   },
 ];
 
