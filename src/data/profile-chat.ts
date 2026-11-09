@@ -24,6 +24,11 @@ export const profileChatQuestions: ProfileChatQuestion[] = [
       "There are 8 visual design projects and 5 UX design projects, so a total of 14.",
   },
   {
+    id: "industries",
+    question: "What industries are explored in this portfolio?",
+    answer: "B2B marketing, SaaS, finance and education, among others",
+  },
+  {
     id: "contact",
     question: "How can I get in touch with Tulasi?",
     answer:

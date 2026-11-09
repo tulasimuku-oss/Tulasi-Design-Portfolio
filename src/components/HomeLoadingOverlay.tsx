@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   HOME_LOADING_VIDEO_SRC,
+  dispatchHomeIntroComplete,
   markHomeIntroSeen,
   shouldPlayHomeIntro,
 } from "@/lib/home-intro";
@@ -23,15 +24,18 @@ export function HomeLoadingOverlay() {
     setPhase("fading");
   }, [forceIntro]);
 
-  useEffect(() => {
-    if (!shouldPlayHomeIntro({ force: forceIntro })) return;
+  useLayoutEffect(() => {
+    if (!shouldPlayHomeIntro({ force: forceIntro })) {
+      dispatchHomeIntroComplete();
+      return;
+    }
 
-    setPhase("playing");
-    const previousOverflow = document.body.style.overflow;
+    document.body.classList.add("home-intro-active");
     document.body.style.overflow = "hidden";
+    setPhase("playing");
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = "";
     };
   }, [forceIntro]);
 
@@ -59,6 +63,7 @@ export function HomeLoadingOverlay() {
     const timer = window.setTimeout(() => {
       setPhase("hidden");
       document.body.style.overflow = "";
+      dispatchHomeIntroComplete();
     }, 750);
 
     return () => window.clearTimeout(timer);

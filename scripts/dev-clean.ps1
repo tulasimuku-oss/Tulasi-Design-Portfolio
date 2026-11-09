@@ -27,4 +27,5 @@ if (-not (Test-Path (Join-Path $portfolioRoot "node_modules\next"))) {
 }
 
 Write-Host "Starting dev server from $portfolioRoot ..."
+Write-Host "Open http://127.0.0.1:3000/ (prefer 127.0.0.1 over localhost on Windows)."
 npm run dev

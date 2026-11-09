@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/data/site";
 import { FadeIn } from "@/components/AnimatedSection";
 import { ContactDialog } from "@/components/ContactDialog";
+import { ProfileChatLauncher } from "@/components/ProfileChatLauncher";
 import { useProfileChatOpen } from "@/hooks/useProfileChatOpen";
 
 const HIGHLIGHTS = [
@@ -188,14 +189,17 @@ export function HeroSection() {
             <div className="hero-bio-panel">
               <div className="hero-bio-panel__glass" aria-hidden />
               <div className="hero-bio-panel__content p-6 md:p-8">
-                <p className="hero-bio-panel__text text-base leading-relaxed md:text-lg">
-                  {site.bio}
-                </p>
-                <p className="hero-bio-panel__meta mt-4 text-sm">
-                  {site.availability}
-                </p>
+                <div className="hero-bio-panel__intro">
+                  <p className="hero-bio-panel__text text-base leading-relaxed md:text-lg">
+                    {site.bio}
+                  </p>
+                  <p className="hero-bio-panel__meta mt-4 text-sm">
+                    {site.availability}
+                  </p>
+                </div>
 
-                <div className="mt-7 flex flex-wrap items-center gap-3">
+                <div className="hero-bio-panel__actions">
+                  <ProfileChatLauncher />
                   <Link href="/work" className="hero-bio-panel__projects-link">
                     View All Projects
                   </Link>

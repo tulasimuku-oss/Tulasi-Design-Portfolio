@@ -2,6 +2,22 @@ const INTRO_SEEN_KEY = "portfolio-home-intro-seen";
 
 export const HOME_LOADING_VIDEO_SRC = "/portfolio-loading.mp4";
 
+export const HOME_INTRO_COMPLETE_EVENT = "portfolio-home-intro-complete";
+
+let homeIntroCompleteFired = false;
+
+export function homeIntroCompleteAlreadyFired(): boolean {
+  return homeIntroCompleteFired;
+}
+
+export function dispatchHomeIntroComplete(): void {
+  if (typeof window === "undefined") return;
+  homeIntroCompleteFired = true;
+  queueMicrotask(() => {
+    window.dispatchEvent(new Event(HOME_INTRO_COMPLETE_EVENT));
+  });
+}
+
 function safePathname(url: string): string {
   try {
     return new URL(url, window.location.origin).pathname;
