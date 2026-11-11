@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import type { Project } from "@/data/projects";
 import { getProjectCover } from "@/lib/project-images";
 import { ProjectCoverFrame } from "@/components/ProjectCoverFrame";
+import { MotionReveal } from "@/components/MotionReveal";
 
 interface ProjectGridProps {
   projects: Project[];
@@ -23,7 +23,8 @@ export function ProjectGrid({ projects, featured = false }: ProjectGridProps) {
           : getProjectCover(project.slug, project.coverImage);
 
         return (
-          <motion.article
+          <MotionReveal
+            as="article"
             key={project.slug}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -39,12 +40,12 @@ export function ProjectGrid({ projects, featured = false }: ProjectGridProps) {
               )}
 
               <div className="glass-caption px-5 py-4">
-                <p className="text-base font-medium leading-snug text-text-primary transition-colors group-hover:text-peri-glow md:text-lg">
+                <p className="text-base font-medium leading-snug text-text-primary transition-colors md:group-hover:text-peri-glow md:text-lg">
                   {project.title}
                 </p>
               </div>
             </Link>
-          </motion.article>
+          </MotionReveal>
         );
       })}
     </div>
@@ -65,7 +66,7 @@ export function CategoryPanel({
   index,
 }: CategoryPanelProps) {
   return (
-    <motion.div
+    <MotionReveal
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -73,18 +74,18 @@ export function CategoryPanel({
     >
       <Link
         href={href}
-        className="glass-strong group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(102,103,171,0.3)] md:p-8"
+        className="glass-strong group block rounded-2xl p-6 transition-all duration-300 md:p-8 md:hover:-translate-y-1 md:hover:shadow-[0_20px_60px_rgba(102,103,171,0.3)]"
       >
-        <h2 className="text-xl font-medium text-text-primary transition-colors group-hover:text-peri-glow md:text-2xl">
+        <h2 className="text-xl font-medium text-text-primary transition-colors md:group-hover:text-peri-glow md:text-2xl">
           {label}
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-text-muted md:text-base">
           {description}
         </p>
-        <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-peri-glow transition-transform group-hover:translate-x-1">
+        <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-peri-glow transition-transform md:group-hover:translate-x-1">
           View projects →
         </span>
       </Link>
-    </motion.div>
+    </MotionReveal>
   );
 }

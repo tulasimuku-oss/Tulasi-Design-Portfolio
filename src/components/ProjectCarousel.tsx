@@ -146,7 +146,7 @@ function CarouselCard({
           <div className="aspect-video bg-gradient-to-br from-peri-dark to-bg-deep" />
         )}
         <div className="glass-caption hidden px-5 py-4 md:block">
-          <p className="text-base font-medium leading-snug text-text-primary transition-colors group-hover:text-peri-glow md:text-lg">
+          <p className="text-base font-medium leading-snug text-text-primary transition-colors md:group-hover:text-peri-glow md:text-lg">
             {project.title}
           </p>
         </div>

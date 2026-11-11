@@ -44,7 +44,7 @@ function navLinkClass(isActive: boolean) {
   return `label-caps rounded-full px-3.5 py-1.5 transition-all duration-300 ${
     isActive
       ? "bg-white/14 text-peri-glow shadow-[inset_0_1px_1px_rgba(255,255,255,0.45)] ring-1 ring-white/30"
-      : "text-text-muted hover:bg-white/8 hover:text-text-primary"
+      : "text-text-muted md:hover:bg-white/8 md:hover:text-text-primary"
   }`;
 }
 

@@ -162,7 +162,7 @@ export function ContactDialog({ open, onClose }: ContactDialogProps) {
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
                   aria-label={label}
-                  className="contact-dialog-icon flex h-16 w-16 items-center justify-center rounded-full text-text-primary transition-all duration-300 hover:scale-105 hover:text-peri-glow md:h-[4.5rem] md:w-[4.5rem]"
+                  className="contact-dialog-icon flex h-16 w-16 items-center justify-center rounded-full text-text-primary transition-all duration-300 md:h-[4.5rem] md:w-[4.5rem] md:hover:scale-105 md:hover:text-peri-glow"
                 >
                   <Icon />
                 </a>

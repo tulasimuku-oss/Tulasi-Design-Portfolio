@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { MotionReveal } from "@/components/MotionReveal";
+import { useIsMobileViewport } from "@/hooks/useIsMobileViewport";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -15,15 +16,16 @@ export function AnimatedSection({
   delay = 0,
 }: AnimatedSectionProps) {
   return (
-    <motion.section
+    <MotionReveal
+      as="section"
+      className={className}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
     >
       {children}
-    </motion.section>
+    </MotionReveal>
   );
 }
 
@@ -32,14 +34,20 @@ export function FadeIn({
   className = "",
   delay = 0,
 }: AnimatedSectionProps) {
+  const mobile = useIsMobileViewport();
+
+  if (mobile) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
-    <motion.div
+    <MotionReveal
+      className={className}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
     >
       {children}
-    </motion.div>
+    </MotionReveal>
   );
 }

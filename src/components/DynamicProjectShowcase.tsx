@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { MotionReveal } from "@/components/MotionReveal";
 import type { Project } from "@/data/projects";
 import { categoryLabels } from "@/data/projects";
 import { LazyInView } from "@/components/LazyInView";
@@ -54,7 +54,8 @@ export function DynamicProjectShowcase({
           : layoutPatterns[index % layoutPatterns.length];
 
         return (
-          <motion.article
+          <MotionReveal
+            as="article"
             key={project.slug}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -86,7 +87,7 @@ export function DynamicProjectShowcase({
                         src={cover}
                         alt={project.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 md:group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 50vw"
                         quality={75}
                         priority={index < 2}
@@ -106,12 +107,12 @@ export function DynamicProjectShowcase({
                     ? categoryLabels[project.category]
                     : `${categoryLabels[project.category]} · ${project.year}`}
                 </span>
-                <h3 className="mt-2 text-lg font-medium leading-tight text-text-primary transition-colors group-hover:text-peri-glow md:text-xl">
+                <h3 className="mt-2 text-lg font-medium leading-tight text-text-primary transition-colors md:group-hover:text-peri-glow md:text-xl">
                   {project.title}
                 </h3>
               </div>
             </Link>
-          </motion.article>
+          </MotionReveal>
         );
       })}
     </div>

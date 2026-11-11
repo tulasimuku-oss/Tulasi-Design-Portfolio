@@ -190,7 +190,7 @@ export function ImageLightbox({
           <button
             type="button"
             onClick={handleClose}
-            className="glass-pill flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full text-lg text-text-primary transition-colors hover:text-peri-glow"
+            className="glass-pill flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full text-lg text-text-primary transition-colors md:hover:text-peri-glow"
             aria-label="Close full view"
           >
             ✕
@@ -240,7 +240,7 @@ export function ImageLightbox({
             <button
               type="button"
               onClick={() => onNavigate(currentIndex - 1)}
-              className="glass-pill pointer-events-auto absolute left-2 top-1/2 z-10 min-h-11 -translate-y-1/2 rounded-full px-3 py-3 text-text-primary transition-colors hover:text-peri-glow md:left-4 md:px-4"
+              className="glass-pill pointer-events-auto absolute left-2 top-1/2 z-10 min-h-11 -translate-y-1/2 rounded-full px-3 py-3 text-text-primary transition-colors md:left-4 md:px-4 md:hover:text-peri-glow"
               aria-label="Previous image"
             >
               ←
@@ -251,7 +251,7 @@ export function ImageLightbox({
             <button
               type="button"
               onClick={() => onNavigate(currentIndex + 1)}
-              className="glass-pill pointer-events-auto absolute right-2 top-1/2 z-10 min-h-11 -translate-y-1/2 rounded-full px-3 py-3 text-text-primary transition-colors hover:text-peri-glow md:right-4 md:px-4"
+              className="glass-pill pointer-events-auto absolute right-2 top-1/2 z-10 min-h-11 -translate-y-1/2 rounded-full px-3 py-3 text-text-primary transition-colors md:right-4 md:px-4 md:hover:text-peri-glow"
               aria-label="Next image"
             >
               →

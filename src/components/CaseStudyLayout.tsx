@@ -24,7 +24,7 @@ export function CaseStudyHero({
           <div className="glass-panel glow-soft p-6 md:p-10">
             <Link
               href="/work"
-              className="label-caps inline-flex items-center gap-2 text-text-muted transition-colors hover:text-peri-glow"
+              className="label-caps inline-flex items-center gap-2 text-text-muted transition-colors md:hover:text-peri-glow"
             >
               ← Back to Home
             </Link>

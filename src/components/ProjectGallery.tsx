@@ -122,7 +122,7 @@ function GalleryImage({
 
   const frameClass = `glass-frame project-gallery-showcase__frame block w-full overflow-hidden ${className}`;
   const imageClass = `project-gallery-showcase__image h-auto w-full max-md:object-contain ${fitClass}${
-    interactive ? " transition-transform duration-500 group-hover:scale-[1.01]" : ""
+    interactive ? " transition-transform duration-500 md:group-hover:scale-[1.01]" : ""
   }`;
 
   const content = (

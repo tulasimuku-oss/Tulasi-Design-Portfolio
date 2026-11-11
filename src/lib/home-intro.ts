@@ -1,3 +1,5 @@
+import { mobileLayoutMediaQuery } from "@/lib/viewport";
+
 const INTRO_SEEN_KEY = "portfolio-home-intro-seen";
 
 export const HOME_LOADING_VIDEO_SRC = "/portfolio-loading.mp4";
@@ -77,6 +79,10 @@ export function shouldPlayHomeIntro(options?: { force?: boolean }): boolean {
   if (typeof window === "undefined") return false;
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return false;
+  }
+
+  if (window.matchMedia(mobileLayoutMediaQuery).matches) {
     return false;
   }
 

@@ -1381,6 +1381,71 @@ body.home-intro-active .profile-chat__floating {
 }
 
 @media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .glass-card:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.26),
+      inset 0 1px 1px rgba(255, 255, 255, 0.42),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .cta-button:hover,
+  .slide-link-button:hover,
+  .project-linkedin-connect:hover {
+    transform: none;
+  }
+
+  .hero-bio-panel__projects-link:hover {
+    color: var(--peri-glow);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.38);
+    transform: none;
+  }
+
+  .portal-panel:hover,
+  .portal-panel:focus-within {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.26),
+      inset 0 1px 1px rgba(255, 255, 255, 0.42),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .profile-chat__launcher:hover {
+    transform: none;
+  }
+
+  .profile-chat__icon-btn:hover {
+    background: transparent;
+    color: inherit;
+  }
+
+  .profile-chat__question:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(184, 185, 232, 0.22);
+  }
+
+  .contact-dialog-icon:hover {
+    transform: none;
+    color: #1e1c42;
+  }
+
+  .project-carousel .glass-card:hover {
+    transform: none;
+  }
+
+  .project-carousel__arrow:hover,
+  .project-carousel__dot:hover:not(.is-active) {
+    transform: none;
+    opacity: 1;
+  }
+
   .hero-bio-panel__cta-label--full {
     display: none;
   }

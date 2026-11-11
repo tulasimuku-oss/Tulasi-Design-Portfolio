@@ -61,7 +61,7 @@ export function CollapsibleWorkCategory({
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-controls={`${id}-panel`}
-            className="glass mb-5 flex w-full items-center justify-between gap-4 rounded-2xl px-5 py-4 text-left transition-colors hover:border-white/40 md:mb-8 md:px-6 md:py-5"
+            className="glass mb-5 flex w-full items-center justify-between gap-4 rounded-2xl px-5 py-4 text-left transition-colors md:mb-8 md:px-6 md:py-5 md:hover:border-white/40"
           >
             <h2 className="text-xl font-medium text-text-primary md:text-2xl">
               {label}

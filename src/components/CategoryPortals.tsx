@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { MotionReveal } from "@/components/MotionReveal";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { categories } from "@/data/site";
 import { useProfileChatOpen } from "@/hooks/useProfileChatOpen";
@@ -15,7 +15,7 @@ const portals = [
     image: "/explore/ui-visual-design.png",
     hoverVideo: "/explore/ui-design-hover.mp4",
     tint: "from-fuchsia-400/20 via-peri/25 to-transparent",
-    glow: "group-hover:shadow-[0_24px_80px_rgba(192,132,252,0.2)]",
+    glow: "md:group-hover:shadow-[0_24px_80px_rgba(192,132,252,0.2)]",
   },
   {
     id: "ux" as const,
@@ -25,7 +25,7 @@ const portals = [
     image: "/explore/ux-service-design.png",
     hoverVideo: "/explore/ux-design-hover.mp4",
     tint: "from-sky-400/25 via-peri/20 to-transparent",
-    glow: "group-hover:shadow-[0_24px_80px_rgba(56,189,248,0.18)]",
+    glow: "md:group-hover:shadow-[0_24px_80px_rgba(56,189,248,0.18)]",
   },
 ];
 
@@ -71,7 +71,7 @@ export function CategoryPortals() {
         const isActive = activeId === portal.id;
 
         return (
-          <motion.div
+          <MotionReveal
             key={portal.id}
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +126,7 @@ export function CategoryPortals() {
 
               <div className="portal-panel__content flex h-full flex-col justify-between p-6 md:p-8">
                 <div>
-                  <h2 className="text-2xl font-medium text-text-primary transition-colors group-hover:text-peri-glow md:text-3xl">
+                  <h2 className="text-2xl font-medium text-text-primary transition-colors md:group-hover:text-peri-glow md:text-3xl">
                     {portal.label}
                   </h2>
                   <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-muted md:text-base">
@@ -134,13 +134,13 @@ export function CategoryPortals() {
                   </p>
                 </div>
 
-                <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-peri-glow transition-transform group-hover:translate-x-1.5">
+                <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-peri-glow transition-transform md:group-hover:translate-x-1.5">
                   View projects
                   <span aria-hidden>→</span>
                 </span>
               </div>
             </Link>
-          </motion.div>
+          </MotionReveal>
         );
       })}
     </div>

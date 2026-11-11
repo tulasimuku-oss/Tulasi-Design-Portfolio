@@ -15,6 +15,8 @@ import { FadeIn } from "@/components/AnimatedSection";
 import { ContactDialog } from "@/components/ContactDialog";
 import { ProfileChatLauncher } from "@/components/ProfileChatLauncher";
 import { useProfileChatOpen } from "@/hooks/useProfileChatOpen";
+import { MotionReveal } from "@/components/MotionReveal";
+import { useIsMobileViewport } from "@/hooks/useIsMobileViewport";
 
 const HIGHLIGHTS = [
   "deep research",
@@ -142,12 +144,14 @@ export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const [contactOpen, setContactOpen] = useState(false);
   const chatOpen = useProfileChatOpen();
+  const isMobile = useIsMobileViewport();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  const useScrollMotion = !isMobile && !chatOpen;
 
   return (
     <section
@@ -158,9 +162,9 @@ export function HeroSection() {
         <div className="hero-grid relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-14 lg:pt-2">
           <motion.div
             style={
-              chatOpen
-                ? { y: 0, opacity: 1 }
-                : { y: contentY, opacity: contentOpacity }
+              useScrollMotion
+                ? { y: contentY, opacity: contentOpacity }
+                : { y: 0, opacity: 1 }
             }
             className="relative min-w-0"
           >
@@ -173,18 +177,18 @@ export function HeroSection() {
             </FadeIn>
             <motion.div
               className="hero-portrait-gif pointer-events-none hidden lg:block"
-              style={chatOpen ? { y: 0 } : { y: contentY }}
+              style={useScrollMotion ? { y: contentY } : { y: 0 }}
               aria-hidden
             >
               <div className="hero-portrait-gif__halftone" />
             </motion.div>
           </motion.div>
 
-          <motion.div
+          <MotionReveal
+            className="relative z-[3]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-[3]"
           >
             <div className="hero-bio-panel">
               <div className="hero-bio-panel__glass" aria-hidden />
@@ -223,7 +227,7 @@ export function HeroSection() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionReveal>
 
         </div>
       </div>

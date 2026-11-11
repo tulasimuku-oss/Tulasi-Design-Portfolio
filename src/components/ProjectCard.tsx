@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import type { Project } from "@/data/projects";
 import { getProjectCover } from "@/lib/project-images";
 import { ProjectCoverFrame } from "@/components/ProjectCoverFrame";
+import { MotionReveal } from "@/components/MotionReveal";
 
 interface ProjectCardProps {
   project: Project;
@@ -15,7 +15,8 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   const coverImage = getProjectCover(project.slug, project.coverImage);
 
   return (
-    <motion.article
+    <MotionReveal
+      as="article"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
@@ -29,11 +30,11 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
           <div className="glass-image-frame aspect-[4/3] bg-gradient-to-br from-peri-dark to-bg-deep" />
         )}
         <div className="glass-caption px-5 py-4">
-          <p className="font-medium text-text-primary group-hover:text-peri-glow">
+          <p className="font-medium text-text-primary md:group-hover:text-peri-glow">
             {project.title}
           </p>
         </div>
       </Link>
-    </motion.article>
+    </MotionReveal>
   );
 }

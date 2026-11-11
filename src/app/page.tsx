@@ -57,7 +57,7 @@ export default function HomePage() {
               href="https://atomtypelab.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-subtle underline decoration-white/20 underline-offset-2 transition-colors hover:text-peri-glow"
+              className="text-text-subtle underline decoration-white/20 underline-offset-2 transition-colors md:hover:text-peri-glow"
             >
               Atom Type Lab
             </a>{" "}
@@ -66,7 +66,7 @@ export default function HomePage() {
               href="https://davidfucsku.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-subtle underline decoration-white/20 underline-offset-2 transition-colors hover:text-peri-glow"
+              className="text-text-subtle underline decoration-white/20 underline-offset-2 transition-colors md:hover:text-peri-glow"
             >
               David Fucsku
             </a>
