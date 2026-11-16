@@ -12,6 +12,13 @@ export const profileChatQuestions: ProfileChatQuestion[] = [
       "Tulasi Mukunda is a UX designer from Bengaluru, India. She has 2+ years of total experience, including designing web pages and graphics.",
   },
   {
+    id: "why-hire-experience",
+    question:
+      "Tulasi has 2 years of experience, but I want a candidate with more than that. Why should I hire her?",
+    answer:
+      "More experience does not always equal relevant skills. I am a quick learner with strong teamwork skills. I am ready to step outside my comfort zone and initiate tasks outside my job description. I am also actively exploring emerging AI-based tools to speed up my workflow.",
+  },
+  {
     id: "skills",
     question: "What are Tulasi's skills?",
     answer:
