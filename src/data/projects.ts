@@ -38,6 +38,8 @@ export const projects: Project[] = [
     year: "2024",
     category: "ui",
     featured: false,
+    description:
+      "Caelum is a dynamic experience where spaces come alive, changing mood with the weather and crowd.",
     coverImage: "/projects/caelum/cover.png",
     featuredCoverImage: "/projects/caelum/cover.png",
   },

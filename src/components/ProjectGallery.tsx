@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { LazyInView } from "@/components/LazyInView";
 import { SlideLinkButtons } from "@/components/SlideLinkButtons";
+import type { ProjectGalleryFinale } from "@/data/project-gallery-finale";
 import type { SlideLink } from "@/data/slide-links";
 import { optimizeGalleryUrl, isRemotePortfolioImage } from "@/lib/project-images";
 
@@ -15,6 +16,7 @@ interface ProjectGalleryProps {
   imageFit?: "cover" | "contain";
   interactive?: boolean;
   slideLinks?: Record<number, SlideLink[]>;
+  finale?: ProjectGalleryFinale;
 }
 
 export function ProjectGallery({
@@ -24,10 +26,11 @@ export function ProjectGallery({
   imageFit = "cover",
   interactive = true,
   slideLinks,
+  finale,
 }: ProjectGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  if (images.length === 0) return null;
+  if (images.length === 0 && !finale) return null;
 
   if (layout === "masonry") {
     return (
@@ -82,6 +85,11 @@ export function ProjectGallery({
             )}
           </div>
         ))}
+        {finale && (
+          <div className="project-gallery-showcase__slide mx-auto max-w-6xl px-0 md:px-4">
+            <GalleryVideo finale={finale} />
+          </div>
+        )}
       </div>
 
       {interactive && lightboxIndex !== null && (
@@ -94,6 +102,28 @@ export function ProjectGallery({
         />
       )}
     </>
+  );
+}
+
+function GalleryVideo({ finale }: { finale: ProjectGalleryFinale }) {
+  return (
+    <figure className="glass-frame project-gallery-showcase__frame project-gallery-showcase__frame--video block w-full">
+      <div className="project-gallery-showcase__video-shell">
+        <div className="project-gallery-showcase__video-wrap">
+          <video
+            className="project-gallery-showcase__video"
+            src={finale.videoSrc}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label={finale.caption}
+          />
+        </div>
+        <figcaption className="project-gallery-showcase__video-caption">
+          {finale.caption}
+        </figcaption>
+      </div>
+    </figure>
   );
 }
 

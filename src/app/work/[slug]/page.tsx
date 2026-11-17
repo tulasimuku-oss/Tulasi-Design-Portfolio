@@ -7,6 +7,7 @@ import { CaseStudyHero } from "@/components/CaseStudyLayout";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { projects, getProject } from "@/data/projects";
 import { getProjectImages, getProjectCover } from "@/lib/project-images";
+import { getProjectGalleryFinale } from "@/data/project-gallery-finale";
 import { getProjectSlideLinks } from "@/data/slide-links";
 import { isSlideDeckProject } from "@/lib/slide-decks";
 
@@ -62,6 +63,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
       ? getProjectImages(slug)
       : galleryWithoutCover(getProjectImages(slug), slug);
   const slideLinks = getProjectSlideLinks(slug);
+  const galleryFinale = getProjectGalleryFinale(slug);
 
   return (
     <>
@@ -83,6 +85,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           }
           interactive
           slideLinks={slideLinks}
+          finale={galleryFinale}
         />
       </section>
 
