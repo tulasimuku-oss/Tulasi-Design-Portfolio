@@ -16,7 +16,7 @@ export const profileChatQuestions: ProfileChatQuestion[] = [
     question:
       "Tulasi has 2 years of experience, but I want a candidate with more than that. Why should I hire her?",
     answer:
-      "More experience does not always equal relevant skills. I am a quick learner with strong teamwork skills. I am ready to step outside my comfort zone and initiate tasks outside my job description. I am also actively exploring emerging AI-based tools to speed up my workflow.",
+      "More experience doesn't always mean a better skill fit. I bring adaptability, quick learning, strong collaboration, and the initiative to take on challenges beyond my role. I also actively explore AI-powered tools to improve efficiency and streamline my workflow.",
   },
   {
     id: "skills",
