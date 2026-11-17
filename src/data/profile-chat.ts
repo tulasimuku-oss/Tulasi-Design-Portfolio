@@ -48,8 +48,10 @@ export const PROFILE_CHAT_STORAGE_KEY = "portfolio-profile-chat-v1";
 export interface ProfileChatSession {
   isOpen: boolean;
   askedIds: string[];
+  /** Quick guide launcher was opened this tab session — stops invite glow. */
+  launcherEngaged?: boolean;
 }
 
 export function emptyProfileChatSession(): ProfileChatSession {
-  return { isOpen: false, askedIds: [] };
+  return { isOpen: false, askedIds: [], launcherEngaged: false };
 }

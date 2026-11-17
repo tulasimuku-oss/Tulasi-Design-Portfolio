@@ -1323,7 +1323,8 @@ body.home-intro-active .profile-chat__floating {
     animation: none !important;
   }
 
-  .profile-chat__launcher {
+  .profile-chat__launcher,
+  .profile-chat__launcher--glow .profile-chat__launcher-icon {
     animation: none;
   }
 }
@@ -1368,8 +1369,19 @@ body.home-intro-active .profile-chat__floating {
   background: linear-gradient(135deg, var(--peri-deep) 0%, var(--peri) 100%);
   border: 1px solid rgba(224, 225, 255, 0.35);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
-  animation: profile-chat-pulse 2.8s ease-in-out infinite;
   transition: transform 0.25s ease;
+}
+
+.profile-chat__launcher--glow {
+  animation: profile-chat-glow-floating 3.1s ease-in-out infinite;
+}
+
+.hero-bio-panel__actions .profile-chat__launcher--hero-slot.profile-chat__launcher--glow {
+  animation: profile-chat-glow-hero 3.1s ease-in-out infinite;
+}
+
+.profile-chat__launcher--glow .profile-chat__launcher-icon {
+  animation: profile-chat-glow-icon 3.1s ease-in-out infinite;
 }
 
 .profile-chat__launcher:hover {
@@ -1531,8 +1543,17 @@ body.home-intro-active .profile-chat__floating {
   }
 
   .hero-bio-panel__actions .profile-chat__launcher {
-    animation: none;
     transition: none;
+  }
+
+  .hero-bio-panel__actions
+    .profile-chat__launcher:not(.profile-chat__launcher--glow) {
+    animation: none;
+  }
+
+  .hero-bio-panel__actions
+    .profile-chat__launcher--hero-slot.profile-chat__launcher--glow {
+    animation: profile-chat-glow-hero-glass 3.1s ease-in-out infinite;
   }
 
   .hero-bio-panel__actions .cta-button {
@@ -1568,8 +1589,11 @@ body.home-intro-active .profile-chat__floating {
     gap: 0;
     padding: 0.65rem;
     border-radius: 0.375rem;
-    animation: none;
     transition: none;
+  }
+
+  .profile-chat__floating .profile-chat__launcher--floating:not(.profile-chat__launcher--glow) {
+    animation: none;
   }
 
   .profile-chat__floating .profile-chat__launcher--floating:hover {
@@ -1803,15 +1827,55 @@ body.profile-chat-open .profile-chat * {
   filter: none;
 }
 
-@keyframes profile-chat-pulse {
+@keyframes profile-chat-glow-floating {
   0%,
   100% {
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    border-color: rgba(224, 225, 255, 0.35);
   }
   50% {
     box-shadow:
       0 10px 36px rgba(0, 0, 0, 0.5),
-      0 0 24px rgba(102, 103, 171, 0.45);
+      0 0 34px rgba(139, 140, 199, 0.55);
+    border-color: rgba(224, 225, 255, 0.52);
+  }
+}
+
+@keyframes profile-chat-glow-hero {
+  0%,
+  100% {
+    box-shadow: 0 0 22px rgba(102, 103, 171, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(139, 140, 199, 0.62),
+      0 0 22px rgba(224, 225, 255, 0.3);
+  }
+}
+
+@keyframes profile-chat-glow-hero-glass {
+  0%,
+  100% {
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.38);
+  }
+  50% {
+    box-shadow:
+      0 0 28px rgba(139, 140, 199, 0.48),
+      0 0 12px rgba(224, 225, 255, 0.18);
+    border-color: rgba(224, 225, 255, 0.55);
+  }
+}
+
+@keyframes profile-chat-glow-icon {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+      0 0 12px rgba(224, 225, 255, 0.45);
   }
 }
 

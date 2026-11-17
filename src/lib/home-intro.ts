@@ -45,19 +45,19 @@ function computeInitialIntroEligible(): boolean {
 
   const landingPath = safePathname(nav.name);
 
-  if (nav.type === "reload") {
-    return landingPath === "/";
+  if (landingPath !== "/") {
+    return false;
+  }
+
+  if (sessionStorage.getItem(INTRO_SEEN_KEY) === "1") {
+    return false;
+  }
+
+  if (nav.type === "reload" || nav.type === "back_forward") {
+    return false;
   }
 
   if (nav.type === "navigate") {
-    if (landingPath !== "/") {
-      return false;
-    }
-
-    if (sessionStorage.getItem(INTRO_SEEN_KEY) === "1") {
-      return false;
-    }
-
     const ref = document.referrer;
     if (ref) {
       try {
@@ -87,6 +87,9 @@ export function shouldPlayHomeIntro(options?: { force?: boolean }): boolean {
   }
 
   if (options?.force) {
+    if (window.matchMedia(mobileLayoutMediaQuery).matches) {
+      return false;
+    }
     return true;
   }
 

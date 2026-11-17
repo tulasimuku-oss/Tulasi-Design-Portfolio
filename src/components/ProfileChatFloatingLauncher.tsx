@@ -7,7 +7,7 @@ import { useHomeIntroActive } from "@/hooks/useHomeIntroActive";
 
 export function ProfileChatFloatingLauncher() {
   const pathname = usePathname();
-  const { openChat, isOpen } = useProfileChat();
+  const { openChat, isOpen, launcherShouldGlow } = useProfileChat();
   const homeIntroActive = useHomeIntroActive();
 
   const onHome = pathname === "/";
@@ -17,7 +17,9 @@ export function ProfileChatFloatingLauncher() {
     <div className="profile-chat__floating" aria-hidden={false}>
       <button
         type="button"
-        className="profile-chat__launcher profile-chat__launcher--floating"
+        className={`profile-chat__launcher profile-chat__launcher--floating${
+          launcherShouldGlow ? " profile-chat__launcher--glow" : ""
+        }`}
         onClick={openChat}
         aria-label="Ask about Tulasi — open quick guide"
       >

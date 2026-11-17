@@ -32,11 +32,14 @@ function readSession(): ProfileChatSession {
     if (!raw) return emptyProfileChatSession();
     const parsed = JSON.parse(raw) as ProfileChatSession;
     if (!Array.isArray(parsed.askedIds)) return emptyProfileChatSession();
+    const askedIds = parsed.askedIds.filter((id) =>
+      profileChatQuestions.some((q) => q.id === id),
+    );
     return {
       isOpen: Boolean(parsed.isOpen),
-      askedIds: parsed.askedIds.filter((id) =>
-        profileChatQuestions.some((q) => q.id === id),
-      ),
+      askedIds,
+      launcherEngaged:
+        Boolean(parsed.launcherEngaged) || askedIds.length > 0,
     };
   } catch {
     return emptyProfileChatSession();
@@ -53,6 +56,7 @@ type ProfileChatContextValue = {
   closeChat: () => void;
   askQuestion: (id: string) => void;
   isOpen: boolean;
+  launcherShouldGlow: boolean;
 };
 
 const ProfileChatContext = createContext<ProfileChatContextValue | null>(null);
@@ -206,7 +210,11 @@ export function ProfileChatProvider({ children }: { children: ReactNode }) {
 
   const openChat = useCallback(() => {
     setSession((prev) => {
-      const next = { ...prev, isOpen: true };
+      const next = {
+        ...prev,
+        isOpen: true,
+        launcherEngaged: true,
+      };
       writeSession(next);
       return next;
     });
@@ -270,6 +278,7 @@ export function ProfileChatProvider({ children }: { children: ReactNode }) {
       closeChat,
       askQuestion,
       isOpen: session.isOpen,
+      launcherShouldGlow: !session.launcherEngaged,
     }),
     [session, openChat, closeChat, askQuestion],
   );

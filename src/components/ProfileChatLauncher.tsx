@@ -15,7 +15,7 @@ function LauncherContent() {
 }
 
 export function ProfileChatLauncher() {
-  const { openChat, isOpen } = useProfileChat();
+  const { openChat, isOpen, launcherShouldGlow } = useProfileChat();
 
   if (isOpen) {
     return (
@@ -31,7 +31,9 @@ export function ProfileChatLauncher() {
   return (
     <button
       type="button"
-      className="profile-chat__launcher profile-chat__launcher--hero-slot"
+      className={`profile-chat__launcher profile-chat__launcher--hero-slot${
+        launcherShouldGlow ? " profile-chat__launcher--glow" : ""
+      }`}
       onClick={openChat}
       aria-label="Ask about Tulasi — open quick guide"
     >
