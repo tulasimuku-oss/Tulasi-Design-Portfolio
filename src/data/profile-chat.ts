@@ -22,7 +22,13 @@ export const profileChatQuestions: ProfileChatQuestion[] = [
     id: "skills",
     question: "What are Tulasi's skills?",
     answer:
-      "Tulasi is well-versed in wireframing, prototyping, user research, user-centered design principles, and usability and accessibility testing.",
+      "Tulasi is well-versed in wireframing, prototyping, user research, user-centered design principles, and usability and accessibility testing. She also has experience in video editing, animation, and creating brand kits.",
+  },
+  {
+    id: "certifications",
+    question: "What certifications does Tulasi have?",
+    answer:
+      "Tulasi has completed certification courses in research methods, learning experience, accessibility and UX dark patterns, and currently pursuing a course related to Agentic AI and GenAI",
   },
   {
     id: "project-count",

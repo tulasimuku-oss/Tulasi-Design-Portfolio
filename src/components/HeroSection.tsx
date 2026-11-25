@@ -170,7 +170,7 @@ export function HeroSection() {
           >
             <FadeIn className="relative z-[2] min-w-0">
               <p className="label-caps text-peri-glow">Tulasi Mukunda</p>
-              <p className="label-caps mt-2 text-text-subtle">UI/UX Designer</p>
+              <p className="label-caps mt-2 text-text-subtle">{site.title}</p>
               <div className="mt-5">
                 <KineticTagline />
               </div>

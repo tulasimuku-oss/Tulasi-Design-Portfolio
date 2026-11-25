@@ -1,11 +1,12 @@
 export const site = {
   name: "Tulasi Mukunda",
-  title: "UX Designer",
+  title: "Multi-Disciplinary Designer",
   tagline: "I turn research and visual thinking into better experiences.",
   phone: "+91 7619427555",
   whatsapp: "+91 7619427555",
-  bio: "I'm Tulasi Mukunda, a UX designer with a background in visual communication and over 2 years of professional design experience. I combine research, empathy, and visual thinking to create experiences that are both useful and engaging.",
-  availability: "Open to full-time UX/UI roles · Bengaluru & Remote",
+  bio: "I'm Tulasi Mukunda, a designer with over 2 years of professional design experience in UI/UX and visual communication. I combine research, empathy, and visual thinking to create experiences that are both useful and engaging.",
+  availability:
+    "Open to full-time roles · Can relocate anywhere (Bengaluru & remote preferred)",
   linkedin: "https://www.linkedin.com/in/tulasi-mukunda-83926b277/",
   behance: "https://www.behance.net/tulasimuku97",
   email: "tulasimuku@gmail.com",
